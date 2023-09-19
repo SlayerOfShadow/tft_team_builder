@@ -1,13 +1,14 @@
 import useFetch from "./useFetch";
-import Array from "./Array";
+import ChampionArray from "./ChampionArray";
 
 const Body = () => {
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/latest/cdragon/tft/en_us.json");
 
     return (
         <div className="body">
+            {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
-            {data && <Array data={data.sets["9"].champions} />}
+            {data && <ChampionArray data={data["setData"]["0"]["champions"]} />}
         </div>
     );
 }

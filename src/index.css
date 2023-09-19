@@ -31,6 +31,8 @@
 .body {
   background-color: #25293b;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 /* footer */
@@ -49,4 +51,52 @@
 .footer img {
   width: 150px;
   filter: invert(1);
+}
+
+/* champion array */
+.champion-array {
+  margin: 20px;
+  border: 1px solid #565f8a;
+  background-color: #353a53;
+}
+.sort-champions {
+  border-bottom: 1px solid #565f8a;
+  display: flex;
+  justify-content: space-between;
+}
+.sort-champions input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 1.25rem;
+  color: #97a1cf;
+  margin-left: 10px;
+}
+.sort-champions input::placeholder {
+  color: #97a1cf;
+}
+.sort-buttons {
+  display: flex;
+}
+.sort-buttons button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  color: #97a1cf;
+  font-size: 1.25rem;
+  border-left: 1px solid #565f8a;
+  cursor: pointer;
+}
+.champions {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  width: 984px; /* one card is 82px */
+}
+.champion-card {
+  display: flex;
+  padding: 5px;
+}
+.champion-card img {
+  width: 70px;
 }
