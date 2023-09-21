@@ -1,4 +1,4 @@
-const Champion = ({ url, cost }) => {
+const Champion = ({ url, cost, opacity }) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const borderStyle = {
@@ -26,7 +26,7 @@ const Champion = ({ url, cost }) => {
     }
 
     return (
-        <div className="champion-card">
+        <div className="champion-card" style={{ opacity: opacity }}>
             <img src={imageUrl} alt="" style={borderStyle} />
         </div>
     );

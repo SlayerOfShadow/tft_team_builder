@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 
 /* base styles */
 * {
@@ -10,18 +11,15 @@
 .header {
   padding: 15px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   border-bottom: 1px solid white;
   background-color: #191c29;
   filter: drop-shadow(0px 8px 8px rgba(0, 0, 0, 0.2));
 }
 .header h2 {
-  color: white;
-  margin-left: 50px;
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 10px;
+  color: #9e6c36;
+  font-family: "PT Serif";
 }
 .header img {
   width: 300px;
@@ -62,15 +60,15 @@
 .sort-champions {
   border-bottom: 1px solid #565f8a;
   display: flex;
-  justify-content: space-between;
 }
 .sort-champions input {
   outline: none;
   border: none;
   background-color: transparent;
   font-size: 1.25rem;
-  color: #97a1cf;
+  color: white;
   margin-left: 10px;
+  flex-grow: 1;
 }
 .sort-champions input::placeholder {
   color: #97a1cf;
@@ -79,13 +77,20 @@
   display: flex;
 }
 .sort-buttons button {
-  background: none;
+  background-color: #353a53;
   border: none;
   padding: 5px 10px;
   color: #97a1cf;
   font-size: 1.25rem;
   border-left: 1px solid #565f8a;
   cursor: pointer;
+}
+.clear-search-button {
+  border-left: none !important;
+}
+.selected-button {
+  background-color: #565f8a !important;
+  color: white !important;
 }
 .champions {
   display: flex;
