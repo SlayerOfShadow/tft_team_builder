@@ -7,8 +7,6 @@ const Body = () => {
 
     return (
         <div className="body">
-            {error && <div>{error}</div>}
-            {isPending && <div>Loading...</div>}
             <Board />
             {data && <ChampionArray data={data["setData"]["0"]["champions"]} />}
         </div>

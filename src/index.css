@@ -97,7 +97,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 5px;
-  max-width: 1080px; /* one card is 82px */
+  max-width: 1080px;
 }
 .champion-card {
   display: flex;
@@ -111,16 +111,18 @@
 .board {
   display: flex;
   flex-wrap: wrap;
-  max-width: 595px;
+  max-width: 825px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 /* hexagon */
 .hexagon {
-  width: 75px;
-  height: 45px;
+  width: 100px;
+  height: 60px;
   position: relative;
   background-color: #353a53;
-  margin: 30px 5px 30px 5px;
+  margin: 20px 10px 20px 10px;
 }
 
 .hexagon::before,
@@ -128,16 +130,16 @@
   content: "";
   position: absolute;
   width: 0;
-  border-left: 37.5px solid transparent;
-  border-right: 37.5px solid transparent;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
 }
 
 .hexagon::before {
-  top: -21px;
-  border-bottom: 21px solid #353a53;
+  top: -28px;
+  border-bottom: 28px solid #353a53;
 }
 
 .hexagon::after {
-  bottom: -21px;
-  border-top: 21px solid #353a53;
+  bottom: -28px;
+  border-top: 28px solid #353a53;
 }

@@ -5,7 +5,7 @@ const Board = () => {
 
     return (
         <div className="board">
-            {hexagonArray.map((index) => (
+            {hexagonArray.map((_, index) => (
                 <Hexagon position={index} />
             ))}
         </div>
