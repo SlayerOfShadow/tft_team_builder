@@ -1,5 +1,6 @@
 import useFetch from "./useFetch";
 import ChampionArray from "./ChampionArray";
+import Board from "./Board";
 
 const Body = () => {
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.18/cdragon/tft/en_us.json");
@@ -8,6 +9,7 @@ const Body = () => {
         <div className="body">
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
+            <Board />
             {data && <ChampionArray data={data["setData"]["0"]["champions"]} />}
         </div>
     );

@@ -30,7 +30,8 @@
   background-color: #25293b;
   color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* footer */
@@ -96,12 +97,47 @@
   display: flex;
   flex-wrap: wrap;
   padding: 5px;
-  width: 984px; /* one card is 82px */
+  max-width: 1080px; /* one card is 82px */
 }
 .champion-card {
   display: flex;
   padding: 5px;
 }
 .champion-card img {
-  width: 70px;
+  width: 60px;
+}
+
+/* board */
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 595px;
+}
+
+/* hexagon */
+.hexagon {
+  width: 75px;
+  height: 45px;
+  position: relative;
+  background-color: #353a53;
+  margin: 30px 5px 30px 5px;
+}
+
+.hexagon::before,
+.hexagon::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 37.5px solid transparent;
+  border-right: 37.5px solid transparent;
+}
+
+.hexagon::before {
+  top: -21px;
+  border-bottom: 21px solid #353a53;
+}
+
+.hexagon::after {
+  bottom: -21px;
+  border-top: 21px solid #353a53;
 }
