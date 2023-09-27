@@ -8,6 +8,7 @@ const Body = () => {
     return (
         <div className="body">
             <Board />
+            {!data && <div className="loading">Loading...</div>}
             {data && <ChampionArray data={data["setData"]["0"]["champions"]} />}
         </div>
     );

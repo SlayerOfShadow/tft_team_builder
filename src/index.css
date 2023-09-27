@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
 
+:root {
+  --first-color: #97a1cf;
+  --second-color: #565f8a;
+  --third-color: #464c70;
+  --fourth-color: #353a53;
+  --fifth-color: #25293b;
+}
+
 /* base styles */
 * {
   margin: 0;
@@ -27,7 +35,7 @@
 
 /* body */
 .body {
-  background-color: #25293b;
+  background-color: var(--fifth-color);
   color: white;
   display: flex;
   flex-direction: column;
@@ -55,11 +63,11 @@
 /* champion array */
 .champion-array {
   margin: 20px;
-  border: 1px solid #565f8a;
-  background-color: #353a53;
+  border: 1px solid var(--second-color);
+  background-color: var(--fourth-color);
 }
 .sort-champions {
-  border-bottom: 1px solid #565f8a;
+  border-bottom: 1px solid var(--second-color);
   display: flex;
 }
 .sort-champions input {
@@ -72,25 +80,25 @@
   flex-grow: 1;
 }
 .sort-champions input::placeholder {
-  color: #97a1cf;
+  color: var(--first-color);
 }
 .sort-buttons {
   display: flex;
 }
 .sort-buttons button {
-  background-color: #353a53;
+  background-color: var(--fourth-color);
   border: none;
   padding: 5px 10px;
-  color: #97a1cf;
+  color: var(--first-color);
   font-size: 1.25rem;
-  border-left: 1px solid #565f8a;
+  border-left: 1px solid var(--second-color);
   cursor: pointer;
 }
 .clear-search-button {
   border-left: none !important;
 }
 .selected-button {
-  background-color: #565f8a !important;
+  background-color: var(--second-color) !important;
   color: white !important;
 }
 .champions {
@@ -117,29 +125,23 @@
 }
 
 /* hexagon */
-.hexagon {
-  width: 100px;
-  height: 60px;
+.hexagon-border {
+  display: flex;
   position: relative;
-  background-color: #353a53;
-  margin: 20px 10px 20px 10px;
+  width: 100px;
+  height: 110px;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  margin: -7.5px 10px -7.5px 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-.hexagon::before,
-.hexagon::after {
-  content: "";
+.hexagon {
   position: absolute;
-  width: 0;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-}
-
-.hexagon::before {
-  top: -28px;
-  border-bottom: 28px solid #353a53;
-}
-
-.hexagon::after {
-  bottom: -28px;
-  border-top: 28px solid #353a53;
+  width: 95px;
+  height: 104.5px;
+  background-color: var(--fourth-color);
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }

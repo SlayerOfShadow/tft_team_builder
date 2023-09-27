@@ -6,7 +6,7 @@ const Board = () => {
     return (
         <div className="board">
             {hexagonArray.map((_, index) => (
-                <Hexagon position={index} />
+                <Hexagon key={index} position={index} imageUrl={""} cost={0} traits={[]} />
             ))}
         </div>
     );

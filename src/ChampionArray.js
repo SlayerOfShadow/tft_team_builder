@@ -43,6 +43,7 @@ const ChampionArray = ({ data }) => {
                         key={champion.apiName}
                         url={champion.squareIcon}
                         cost={champion.cost}
+                        traits={champion.traits}
                         opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2} />
                 ))}
             </div>

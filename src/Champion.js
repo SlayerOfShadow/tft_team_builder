@@ -1,4 +1,4 @@
-const Champion = ({ url, cost, opacity }) => {
+const Champion = ({ url, cost, traits, opacity }) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const borderStyle = {
