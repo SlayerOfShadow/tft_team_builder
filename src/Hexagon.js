@@ -1,9 +1,12 @@
-const Hexagon = ({ position, imageUrl, cost, traits }) => {
+const Hexagon = ({ position, imageUrl, cost, traits, freeHexagon }) => {
     let marginLeft = 0;
     let backgroundColor;
 
     if (position === 7 || position === 21) {
-        marginLeft = 55;
+        marginLeft = 60;
+    }
+    else {
+        marginLeft = 5;
     }
 
     switch (cost) {
@@ -27,10 +30,14 @@ const Hexagon = ({ position, imageUrl, cost, traits }) => {
             break;
     }
 
+    const handleChampionClick = () => {
+        freeHexagon(position);
+    };
+
     return (
         <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
             <div className="hexagon">
-                <img src={imageUrl} alt="" />
+                {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} />}
             </div>
         </div>
     );

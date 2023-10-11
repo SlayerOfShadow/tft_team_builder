@@ -1,7 +1,7 @@
 import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
-const ChampionArray = ({ data }) => {
+const ChampionArray = ({ data, updateHexagon }) => {
     const [sortedData, setSortedData] = useState(data);
     const [isSortedByName, setIsSortedByName] = useState(false);
     const [searchText, setSearchText] = useState("");
@@ -44,7 +44,8 @@ const ChampionArray = ({ data }) => {
                         url={champion.squareIcon}
                         cost={champion.cost}
                         traits={champion.traits}
-                        opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2} />
+                        opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
+                        updateHexagon={updateHexagon} />
                 ))}
             </div>
         </div>

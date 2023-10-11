@@ -1,12 +1,10 @@
 import Hexagon from "./Hexagon";
 
-const Board = () => {
-    const hexagonArray = new Array(28).fill(null);
-
+const Board = ({ hexagons, freeHexagon }) => {
     return (
         <div className="board">
-            {hexagonArray.map((_, index) => (
-                <Hexagon key={index} position={index} imageUrl={""} cost={0} traits={[]} />
+            {hexagons.map((hexagon, index) => (
+                <Hexagon key={index} position={index} imageUrl={hexagon.imageUrl} cost={hexagon.cost} traits={hexagon.traits} freeHexagon={freeHexagon} />
             ))}
         </div>
     );
