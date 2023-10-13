@@ -1,4 +1,4 @@
-const Champion = ({ url, cost, traits, opacity, updateHexagon }) => {
+const Champion = ({ url, cost, traits, opacity, updateBoard }) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const borderStyle = {
@@ -26,7 +26,7 @@ const Champion = ({ url, cost, traits, opacity, updateHexagon }) => {
     }
 
     const handleChampionClick = () => {
-        updateHexagon(imageUrl, cost, traits);
+        updateBoard(imageUrl, cost, traits);
     };
 
     return (

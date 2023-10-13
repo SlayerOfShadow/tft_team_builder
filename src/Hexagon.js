@@ -1,4 +1,4 @@
-const Hexagon = ({ position, imageUrl, cost, traits, freeHexagon }) => {
+const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
     let marginLeft = 0;
     let backgroundColor;
 
