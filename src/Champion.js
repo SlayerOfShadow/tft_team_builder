@@ -31,7 +31,7 @@ const Champion = ({ url, cost, traits, opacity, updateBoard }) => {
 
     return (
         <div className="champion-card" style={{ opacity: opacity }} >
-            <img src={imageUrl} type="Champion" style={borderStyle} onClick={handleChampionClick} />
+            <img src={imageUrl} alt="champion-icon" type="Champion" style={borderStyle} onClick={handleChampionClick} />
         </div>
     );
 }
