@@ -68,14 +68,23 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 .no-traits {
   border: 1px solid var(--second-color);
   background-color: var(--fourth-color);
-  padding: 20px 40px 20px 40px;
+  padding: 20px 50px 20px 50px;
   color: var(--first-color);
   font-size: 1.25rem;
   text-align: center;
+}
+.trait {
+  border: 1px solid var(--second-color);
+  background-color: var(--fourth-color);
+  padding: 5px 10px 5px 10px;
+  color: var(--first-color);
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  width: 200px;
+  display: flex;
 }
 
 /* items */
@@ -167,7 +176,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .hexagon {
   position: absolute;
   width: 94px;
@@ -177,7 +185,6 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   cursor: pointer;
 }
-
 .hexagon img
 {
   width: 110%;

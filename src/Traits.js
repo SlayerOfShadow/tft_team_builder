@@ -1,13 +1,13 @@
+import Trait from "./Trait";
+
 const Traits = ({ traits }) => {
-    const traitElements = Array.from(traits).map(([trait, count]) => (
-        <div key={trait} className="trait">
-            {trait} : {count}
-        </div>
+    const activeTraits = Array.from(traits).map(([trait, count]) => (
+        <Trait trait={trait} count={count} />
     ));
 
     return (
         <div className="traits">
-            {traitElements.length > 0 ? traitElements : <div className="no-traits">⚠<br />No active trait</div>}
+            {activeTraits.length > 0 ? activeTraits : <div className="no-traits">⚠<br />No active trait</div>}
         </div>
     );
 }

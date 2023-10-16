@@ -6,7 +6,7 @@ import Traits from "./Traits";
 import Items from "./Items";
 
 const Body = () => {
-    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.18/cdragon/tft/en_us.json");
+    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.20/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null }));
     const [traits, setTraits] = useState(new Map());
 
@@ -51,7 +51,7 @@ const Body = () => {
 
     return (
         <div className="body">
-            <Traits traits={traits} />
+            {data && <Traits traits={traits} />}
             <Board hexagons={hexagons} freeHexagon={freeHexagon} />
             {data && <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />}
             <Items />
