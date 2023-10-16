@@ -1,8 +1,8 @@
-const Trait = ({ trait, count }) => {
+const Trait = ({ trait, count, imageUrl }) => {
     return (
-        <div key={trait} className="trait">
-            <img src="" alt="trait-image" />
-            <div>{trait} <br /> {count}</div>
+        <div className="trait">
+            <img src={imageUrl} alt="trait" />
+            <div className="trait-info"><b>{trait} <br /> {count}</b></div>
         </div>
     );
 }

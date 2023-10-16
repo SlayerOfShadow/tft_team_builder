@@ -51,7 +51,7 @@ const Body = () => {
 
     return (
         <div className="body">
-            {data && <Traits traits={traits} />}
+            {data && <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />}
             <Board hexagons={hexagons} freeHexagon={freeHexagon} />
             {data && <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />}
             <Items />
