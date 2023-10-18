@@ -1,12 +1,16 @@
 import Trait from "./Trait";
 
 const Traits = ({ traits, traitsData }) => {
-    const getImageUrl = (trait) => {
-        return "https://raw.communitydragon.org/latest/game/" + traitsData.find(item => item.name === trait).icon.toLowerCase().replace(".tex", ".png");
+    const traitData = (trait) => {
+        return traitsData.find(item => item.name === trait);
+    }
+
+    const imageUrl = (trait) => {
+        return "https://raw.communitydragon.org/latest/game/" + traitData(trait).icon.toLowerCase().replace(".tex", ".png");
     }
 
     const activeTraits = Array.from(traits).map(([trait, count]) => (
-        <Trait key={trait} trait={trait} count={count} imageUrl={getImageUrl(trait)} />
+        <Trait key={trait} trait={trait} count={count} imageUrl={imageUrl(trait)} traitData={traitData(trait)} />
     ));
 
     return (

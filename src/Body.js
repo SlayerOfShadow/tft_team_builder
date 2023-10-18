@@ -31,6 +31,14 @@ const Body = () => {
         setHexagons(updatedHexagons);
     }
 
+    const clearBoard = () => {
+        const updatedHexagons = [...hexagons];
+        for (let index = 0; index < hexagons.length; index++) {
+            updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null };
+        }
+        setHexagons(updatedHexagons);
+    };
+
     useEffect(() => {
         const traitsMap = new Map();
         const processedUrls = new Set();
@@ -54,7 +62,14 @@ const Body = () => {
             {data && <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />}
             <Board hexagons={hexagons} freeHexagon={freeHexagon} />
             {data && <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />}
-            <Items />
+            <div className="buttons-and-items">
+                <div className="clear-buttons">
+                    <button onClick={clearBoard}>Clear board</button>
+                    <button>Clear items</button>
+                </div>
+                <Items />
+            </div>
+
         </div>
     );
 }

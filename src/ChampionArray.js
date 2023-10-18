@@ -2,18 +2,18 @@ import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
 const ChampionArray = ({ data, updateBoard }) => {
-    const [sortedData, setSortedData] = useState(data);
+    const [sortedChampions, setSortedData] = useState(data);
     const [isSortedByName, setIsSortedByName] = useState(false);
     const [searchText, setSearchText] = useState("");
 
     const sortByName = () => {
-        const sortedByName = [...sortedData].sort((a, b) => a.name.localeCompare(b.name));
+        const sortedByName = [...sortedChampions].sort((a, b) => a.name.localeCompare(b.name));
         setSortedData(sortedByName);
         setIsSortedByName(true);
     };
 
     const sortByCost = () => {
-        const sortedByCost = [...sortedData].sort((a, b) => a.cost - b.cost);
+        const sortedByCost = [...sortedChampions].sort((a, b) => a.cost - b.cost);
         setSortedData(sortedByCost);
         setIsSortedByName(false);
     };
@@ -37,7 +37,7 @@ const ChampionArray = ({ data, updateBoard }) => {
                 </div>
             </div>
             <div className="champions">
-                {sortedData.map((champion) => (
+                {sortedChampions.map((champion) => (
                     champion.traits.length > 0 &&
                     <Champion
                         key={champion.apiName}
