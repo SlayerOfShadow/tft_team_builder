@@ -59,19 +59,28 @@ const Body = () => {
 
     return (
         <div className="body">
-            {data && <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />}
-            <Board hexagons={hexagons} freeHexagon={freeHexagon} />
-            {data && <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />}
-            <div className="buttons-and-items">
+          {data && 
+            <>
+              <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
+              <Board hexagons={hexagons} freeHexagon={freeHexagon} />
+              <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />
+              <div className="buttons-and-items">
                 <div className="clear-buttons">
-                    <button onClick={clearBoard}>Clear board</button>
-                    <button>Clear items</button>
+                  <button onClick={clearBoard}>Clear board</button>
+                  <button>Clear items</button>
                 </div>
                 <Items />
-            </div>
-
+              </div>
+            </>
+          }
+          {isPending && 
+            <h1>Loading...</h1>
+          }
+          {error && 
+            <h1>Could not fetch the data</h1>
+          }
         </div>
-    );
+      );
 }
 
 export default Body;

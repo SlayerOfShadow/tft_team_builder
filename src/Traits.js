@@ -9,9 +9,24 @@ const Traits = ({ traits, traitsData }) => {
         return "https://raw.communitydragon.org/latest/game/" + traitData(trait).icon.toLowerCase().replace(".tex", ".png");
     }
 
+    const currentStyle = (trait, count) => {
+        const data = traitData(trait);
+        let selectedStyle = -1;
+    
+        for (const effect of data.effects) {
+            if (count >= effect.minUnits && count <= effect.maxUnits) {
+                selectedStyle = effect.style;
+                break;
+            }
+        }
+    
+        return selectedStyle;
+    }
+
     const activeTraits = Array.from(traits).map(([trait, count]) => (
-        <Trait key={trait} trait={trait} count={count} imageUrl={imageUrl(trait)} traitData={traitData(trait)} />
-    ));
+        <Trait key={trait} trait={trait} count={count} imageUrl={imageUrl(trait)} traitData={traitData(trait)} currentStyle={currentStyle(trait, count)} />
+    )).sort((a, b) => b.props.currentStyle - a.props.currentStyle);
+
 
     return (
         <div className="traits">

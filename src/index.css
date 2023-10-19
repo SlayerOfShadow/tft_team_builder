@@ -61,6 +61,17 @@
   filter: invert(1);
 }
 
+/* ISPENDING & ERROR */
+.body h1 {
+  grid-column: 2 / 3;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9e6c36;
+  font-family: "PT Serif";
+}
+
 /* TRAITS */
 .traits
 {
@@ -82,10 +93,10 @@
 .trait {
   border: 1px solid var(--second-color);
   background-color: var(--fourth-color);
-  color: var(--first-color);
+  color: white;
   font-size: 1rem;
   margin-bottom: 10px;
-  width: 225px;
+  width: 230px;
   display: flex;
   align-items: center;
 }
@@ -98,7 +109,7 @@
 }
 .trait-count {
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 .traits::-webkit-scrollbar {
   width: 0.5em;
@@ -119,9 +130,9 @@
   align-items: center;
 }
 .buttons-and-items button {
-  background-color: var(--fourth-color);
+  background-color: var(--fifth-color);
   padding: 5px 10px;
-  color: var(--first-color);
+  color: white;
   font-size: 1.25rem;
   border: 1px solid var(--second-color);
   cursor: pointer;
