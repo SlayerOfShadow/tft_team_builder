@@ -7,7 +7,7 @@ import Items from "./Items";
 
 const Body = () => {
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.20/cdragon/tft/en_us.json");
-    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null }));
+    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false }));
     const [traits, setTraits] = useState(new Map());
 
     const filterUniqueChampions = (champions) => {
@@ -21,20 +21,26 @@ const Body = () => {
     const updateBoard = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
         const index = hexagons.findIndex(hexagon => hexagon.cost === 0);
-        updatedHexagons[index] = { imageUrl, cost, traits };
+        updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars:false };
         setHexagons(updatedHexagons);
     };
 
     const freeHexagon = (index) => {
         const updatedHexagons = [...hexagons];
-        updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null };
+        updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false };
+        setHexagons(updatedHexagons);
+    }
+
+    const setStars = (index, stars) => {
+        const updatedHexagons = [...hexagons];
+        updatedHexagons[index].stars = stars;
         setHexagons(updatedHexagons);
     }
 
     const clearBoard = () => {
         const updatedHexagons = [...hexagons];
         for (let index = 0; index < hexagons.length; index++) {
-            updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null };
+            updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false };
         }
         setHexagons(updatedHexagons);
     };
@@ -62,7 +68,7 @@ const Body = () => {
           {data && 
             <>
               <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
-              <Board hexagons={hexagons} freeHexagon={freeHexagon} />
+              <Board hexagons={hexagons} freeHexagon={freeHexagon} setStars={setStars} />
               <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">

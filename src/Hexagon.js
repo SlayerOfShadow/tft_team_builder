@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
+const Hexagon = ({ position, imageUrl, cost, freeHexagon, stars, setStars }) => {
     const [showStars, setShowStars] = useState(false);
-    const [activeStars, setActiveStars] = useState(false);
 
     const handleChampionClick = () => {
         freeHexagon(position);
@@ -13,16 +12,15 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
       };
     
       const handleMouseLeave = () => {
-        if (!activeStars) setShowStars(false);
+        if (stars === false) setShowStars(false);
       };
 
     const handleStarsClick = () => {
-        setActiveStars(!activeStars);
+        setStars(position, !stars);
     };
 
     useEffect(() => {
         if (cost === 0) {
-            setActiveStars(false);
             setShowStars(false);
         }
     }, [cost]);
@@ -71,7 +69,7 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
             <div className="stars" 
                 style={{
                      marginLeft: `${starsMarginLeft}px`,
-                     color: activeStars ? '#f1d25e' : '#565f8a',
+                     color: stars ? '#f1d25e' : '#565f8a',
                     }} 
                 onClick={handleStarsClick} 
                 onMouseEnter={handleMouseEnter} 
