@@ -35,10 +35,13 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
     };
 
     return (
-        <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
-            <div className="hexagon">
-                {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} />}
+        <div className="hexagon">
+            <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
+                <div className="hexagon-image">
+                    {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} />}
+                </div>
             </div>
+            <div className="stars">★★★</div>
         </div>
     );
 }
