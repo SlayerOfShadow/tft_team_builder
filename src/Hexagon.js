@@ -1,9 +1,39 @@
+import { useEffect, useState } from "react";
+
 const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
+    const [showStars, setShowStars] = useState(false);
+    const [activeStars, setActiveStars] = useState(false);
+
+    const handleChampionClick = () => {
+        freeHexagon(position);
+    };
+
+    const handleMouseEnter = () => {
+        setShowStars(true);
+      };
+    
+      const handleMouseLeave = () => {
+        if (!activeStars) setShowStars(false);
+      };
+
+    const handleStarsClick = () => {
+        setActiveStars(!activeStars);
+    };
+
+    useEffect(() => {
+        if (cost === 0) {
+            setActiveStars(false);
+            setShowStars(false);
+        }
+    }, [cost]);
+
     let marginLeft = 0;
+    let starsMarginLeft = 0;
     let backgroundColor;
 
     if (position === 7 || position === 21) {
         marginLeft = 60;
+        starsMarginLeft = 27.5;
     }
     else {
         marginLeft = 5;
@@ -30,18 +60,24 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon }) => {
             break;
     }
 
-    const handleChampionClick = () => {
-        freeHexagon(position);
-    };
-
     return (
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
                 <div className="hexagon-image">
-                    {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} />}
+                    {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>
-            <div className="stars">★★★</div>
+            {showStars && 
+            <div className="stars" 
+                style={{
+                     marginLeft: `${starsMarginLeft}px`,
+                     color: activeStars ? '#f1d25e' : '#565f8a',
+                    }} 
+                onClick={handleStarsClick} 
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave}
+                >★★★
+            </div>}
         </div>
     );
 }
