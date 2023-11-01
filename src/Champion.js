@@ -39,7 +39,7 @@ const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex })
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (positionValue)
             {
-                updateBoardIndex(positionValue, imageUrl, cost, traits);
+                updateBoardIndex(positionValue, imageUrl, cost, traits, false);
             }
         }
     };

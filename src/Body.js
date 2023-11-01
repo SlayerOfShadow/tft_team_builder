@@ -21,13 +21,20 @@ const Body = () => {
     const updateBoard = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
         const index = hexagons.findIndex(hexagon => hexagon.cost === 0);
-        updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars:false };
+        updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: false };
         setHexagons(updatedHexagons);
     };
 
-    const updateBoardIndex = (index, imageUrl, cost, traits) => {
+    const updateBoardIndex = (index, imageUrl, cost, traits, stars) => {
       const updatedHexagons = [...hexagons];
-      updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars:false };
+      updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: stars };
+      setHexagons(updatedHexagons);
+    };
+
+    const updateBoardSwap = (index, targetIndex) => {
+      const updatedHexagons = [...hexagons];
+      updatedHexagons[targetIndex] = hexagons[index];
+      updatedHexagons[index] = hexagons[targetIndex];
       setHexagons(updatedHexagons);
     };
 
@@ -74,7 +81,7 @@ const Body = () => {
           {data && 
             <>
               <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
-              <Board hexagons={hexagons} freeHexagon={freeHexagon} setStars={setStars} />
+              <Board hexagons={hexagons} updateBoardSwap={updateBoardSwap} freeHexagon={freeHexagon} setStars={setStars} />
               <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} updateBoardIndex={updateBoardIndex} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">

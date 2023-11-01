@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, freeHexagon, stars, setStars }) => {
+const Hexagon = ({ position, imageUrl, cost, traits, updateBoardSwap, freeHexagon, stars, setStars }) => {
     const [showStars, setShowStars] = useState(false);
 
     const handleChampionClick = () => {
@@ -17,6 +17,21 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon, stars, setStars }) => 
 
     const handleStarsClick = () => {
         setStars(position, !stars);
+    };
+
+    const handleOnDragEnd = (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+    
+        const elementAtDragEnd = document.elementFromPoint(x, y);
+    
+        if (elementAtDragEnd) {
+            const positionValue = elementAtDragEnd.getAttribute("position");
+            if (positionValue)
+            {
+                updateBoardSwap(position, positionValue);
+            }
+        }
     };
 
     useEffect(() => {
@@ -62,7 +77,7 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon, stars, setStars }) => 
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
                 <div className="hexagon-image" position={position}>
-                    {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
+                    {imageUrl && <img src={imageUrl} alt="" position={position} onClick={handleChampionClick} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>
             {showStars && 
