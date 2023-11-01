@@ -25,6 +25,12 @@ const Body = () => {
         setHexagons(updatedHexagons);
     };
 
+    const updateBoardIndex = (index, imageUrl, cost, traits) => {
+      const updatedHexagons = [...hexagons];
+      updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars:false };
+      setHexagons(updatedHexagons);
+    };
+
     const freeHexagon = (index) => {
         const updatedHexagons = [...hexagons];
         updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false };
@@ -69,7 +75,7 @@ const Body = () => {
             <>
               <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
               <Board hexagons={hexagons} freeHexagon={freeHexagon} setStars={setStars} />
-              <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} />
+              <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} updateBoardIndex={updateBoardIndex} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">
                   <button onClick={clearBoard}>Clear board</button>

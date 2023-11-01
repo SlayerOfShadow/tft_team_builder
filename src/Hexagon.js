@@ -61,7 +61,7 @@ const Hexagon = ({ position, imageUrl, cost, freeHexagon, stars, setStars }) => 
     return (
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
-                <div className="hexagon-image">
+                <div className="hexagon-image" position={position}>
                     {imageUrl && <img src={imageUrl} alt="" onClick={handleChampionClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>
