@@ -60,20 +60,33 @@ const Body = () => {
 
     useEffect(() => {
         const traitsMap = new Map();
+        const traitsOrder = new Map();
         const processedUrls = new Set();
 
         hexagons.forEach(hexagon => {
-            if (hexagon.traits) {
-                if (!processedUrls.has(hexagon.imageUrl)) {
-                    hexagon.traits.forEach(trait => {
-                        traitsMap.set(trait, (traitsMap.get(trait) || 0) + 1);
-                    });
-                    processedUrls.add(hexagon.imageUrl);
-                }
-            }
-        });
+          if (hexagon.traits) {
+              if (!processedUrls.has(hexagon.imageUrl)) {
+                  hexagon.traits.forEach((trait, index) => {
+                      traitsMap.set(trait, (traitsMap.get(trait) || 0) + 1);
+                      traitsOrder.set(trait, index);
+                  });
+                  processedUrls.add(hexagon.imageUrl);
+              }
+          }
+      });
 
-        setTraits(traitsMap);
+      const sortedTraits = [...traitsMap.entries()].sort((a, b) => {
+        const indexA = traitsOrder.get(a[0]);
+        const indexB = traitsOrder.get(b[0]);
+        
+        if (indexA !== indexB) {
+          return indexA - indexB;
+        }
+    
+        return a[0].localeCompare(b[0]);
+      });
+
+      setTraits(sortedTraits);
     }, [hexagons]);
 
     return (
