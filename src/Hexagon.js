@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, traits, updateBoardSwap, freeHexagon, stars, setStars }) => {
+const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars, setStars }) => {
     const [showStars, setShowStars] = useState(false);
 
     const handleChampionClick = () => {
@@ -33,6 +33,10 @@ const Hexagon = ({ position, imageUrl, cost, traits, updateBoardSwap, freeHexago
             }
         }
     };
+
+    const allowDrop = (event) => {
+        event.preventDefault();
+      }
 
     useEffect(() => {
         if (cost === 0) {
@@ -76,7 +80,7 @@ const Hexagon = ({ position, imageUrl, cost, traits, updateBoardSwap, freeHexago
     return (
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
-                <div className="hexagon-image" position={position}>
+                <div className="hexagon-image" position={position} onDragOver={allowDrop}>
                     {imageUrl && <img src={imageUrl} alt="" position={position} onClick={handleChampionClick} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>

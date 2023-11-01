@@ -9,7 +9,6 @@ const Board = ({ hexagons, updateBoardSwap, freeHexagon, setStars }) => {
                     position={index} 
                     imageUrl={hexagon.imageUrl} 
                     cost={hexagon.cost} 
-                    traits={hexagon.traits}
                     updateBoardSwap={updateBoardSwap}
                     freeHexagon={freeHexagon}
                     stars={hexagon.stars} 

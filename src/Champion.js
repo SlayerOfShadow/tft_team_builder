@@ -46,7 +46,7 @@ const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex })
 
     return (
         <div className="champion-card" style={{ opacity: opacity }} >
-            <img 
+            <img
                 src={imageUrl} 
                 alt="champion-icon" 
                 type="Champion" 
