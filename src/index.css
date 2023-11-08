@@ -142,6 +142,45 @@
   background-color: var(--third-color);
 }
 
+/* ITEMS */
+.items-array {
+  border: 1px solid var(--second-color);
+  background-color: var(--fourth-color);
+}
+.sort-items {
+  border-bottom: 1px solid var(--second-color);
+  display: flex;
+}
+.sort-items input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 1.25rem;
+  color: white;
+  margin-left: 10px;
+  flex-grow: 1;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.sort-items input::placeholder {
+  color: var(--first-color);
+}
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  max-width: 312px;
+}
+.item-card {
+  display: flex;
+  padding: 5px;
+}
+.item-card img {
+  width: 40px;
+  cursor: pointer;
+  border: 1px solid var(--second-color);
+}
+
 /* CHAMPION ARRAY */
 .champion-array {
   border: 1px solid var(--second-color);

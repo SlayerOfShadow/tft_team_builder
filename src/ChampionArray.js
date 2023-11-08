@@ -2,19 +2,27 @@ import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
 const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
-    const [sortedChampions, setSortedData] = useState(data);
+    const filterUniqueChampions = (champions) => {
+        const uniqueChampions = {};
+        champions.forEach((champion) => {
+            uniqueChampions[champion.characterName] = champion;
+        });
+        return Object.values(uniqueChampions);
+    };
+
+    const [sortedChampions, setSortedChampions] = useState(filterUniqueChampions(data));
     const [isSortedByName, setIsSortedByName] = useState(false);
     const [searchText, setSearchText] = useState("");
 
     const sortByName = () => {
         const sortedByName = [...sortedChampions].sort((a, b) => a.name.localeCompare(b.name));
-        setSortedData(sortedByName);
+        setSortedChampions(sortedByName);
         setIsSortedByName(true);
     };
 
     const sortByCost = () => {
         const sortedByCost = [...sortedChampions].sort((a, b) => a.cost - b.cost);
-        setSortedData(sortedByCost);
+        setSortedChampions(sortedByCost);
         setIsSortedByName(false);
     };
 

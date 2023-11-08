@@ -6,18 +6,10 @@ import Traits from "./Traits";
 import Items from "./Items";
 
 const Body = () => {
-    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.20/cdragon/tft/en_us.json");
-    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false }));
+    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.22/cdragon/tft/en_us.json");
+    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: null }));
     const [traits, setTraits] = useState(new Map());
-
-    const filterUniqueChampions = (champions) => {
-        const uniqueChampions = {};
-        champions.forEach((champion) => {
-            uniqueChampions[champion.characterName] = champion;
-        });
-        return Object.values(uniqueChampions);
-    };
-
+    
     const updateBoard = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
         const index = hexagons.findIndex(hexagon => hexagon.cost === 0);
@@ -95,13 +87,13 @@ const Body = () => {
             <>
               <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
               <Board hexagons={hexagons} updateBoardSwap={updateBoardSwap} freeHexagon={freeHexagon} setStars={setStars} />
-              <ChampionArray data={filterUniqueChampions(data["setData"]["0"]["champions"])} updateBoard={updateBoard} updateBoardIndex={updateBoardIndex} />
+              <ChampionArray data={data["setData"]["0"]["champions"]} updateBoard={updateBoard} updateBoardIndex={updateBoardIndex} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">
                   <button onClick={clearBoard}>Clear board</button>
                   <button>Clear items</button>
                 </div>
-                <Items />
+                <Items data={data["items"]}/>
               </div>
             </>
           }
