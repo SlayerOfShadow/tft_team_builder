@@ -1,6 +1,13 @@
 import Item from "./Item";
+import { useState } from "react";
 
 const Items = ({data, updateItemsIndex}) => {
+    const [searchText, setSearchText] = useState("");
+
+    const clearSearch = () => {
+      setSearchText("");
+    };
+
     const filterItems = (items) => {
         return items.filter(item => (
           (item.name !== "Guardian Angel" && item.composition.length > 0 &&
@@ -27,11 +34,17 @@ const Items = ({data, updateItemsIndex}) => {
     return (
         <div className="items-array">
             <div className="sort-items">
-                <input type="text" placeholder="Search item..." maxLength={100}/>
+                <input type="text" placeholder="Search item..." maxLength={100} value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+                {searchText && <button className="clear-search-items-button" onClick={clearSearch}>✕</button>}
             </div>
             <div className="items">
                 {filterItems(data).map((item) => (
-                    <Item key={item.name} url={item.icon} updateItemsIndex={updateItemsIndex}/>
+                    <Item 
+                      key={item.name} 
+                      url={item.icon} 
+                      updateItemsIndex={updateItemsIndex}
+                      opacity={item.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
+                    />
                 ))}
             </div>
         </div>

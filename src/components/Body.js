@@ -6,7 +6,7 @@ import Traits from "./Traits";
 import Items from "./Items";
 
 const Body = () => {
-    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.22/cdragon/tft/en_us.json");
+    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.21/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
     

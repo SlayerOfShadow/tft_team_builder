@@ -180,6 +180,15 @@
   cursor: pointer;
   border: 1px solid var(--second-color);
 }
+button.clear-search-items-button {
+  border: none;
+  background-color: var(--fourth-color);
+  color: var(--first-color);
+  margin: 0;
+}
+button.clear-search-items-button:hover {
+  background-color: var(--third-color);
+}
 
 /* CHAMPION ARRAY */
 .champion-array {

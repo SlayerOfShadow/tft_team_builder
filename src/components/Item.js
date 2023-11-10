@@ -1,4 +1,4 @@
-const Item = ({url, updateItemsIndex}) => {
+const Item = ({url, updateItemsIndex, opacity}) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const handleOnDragEnd = (event) => {
@@ -18,7 +18,7 @@ const Item = ({url, updateItemsIndex}) => {
     };
 
     return ( 
-        <div className="item-card">
+        <div className="item-card" style={{ opacity: opacity }}>
             <img
                 src={imageUrl} 
                 alt="item-icon"
