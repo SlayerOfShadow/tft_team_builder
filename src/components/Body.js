@@ -7,19 +7,19 @@ import Items from "./Items";
 
 const Body = () => {
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.22/cdragon/tft/en_us.json");
-    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: null }));
+    const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
     
     const updateBoard = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
         const index = hexagons.findIndex(hexagon => hexagon.cost === 0);
-        updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: false };
+        updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: false, items: [] };
         setHexagons(updatedHexagons);
     };
 
-    const updateBoardIndex = (index, imageUrl, cost, traits, stars) => {
+    const updateBoardIndex = (index, imageUrl, cost, traits) => {
       const updatedHexagons = [...hexagons];
-      updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: stars };
+      updatedHexagons[index] = { imageUrl: imageUrl, cost: cost, traits: traits, stars: false, items: [] };
       setHexagons(updatedHexagons);
     };
 
@@ -32,7 +32,7 @@ const Body = () => {
 
     const freeHexagon = (index) => {
         const updatedHexagons = [...hexagons];
-        updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false };
+        updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false, items: [] };
         setHexagons(updatedHexagons);
     }
 
@@ -42,10 +42,20 @@ const Body = () => {
         setHexagons(updatedHexagons);
     }
 
+    const updateItemsIndex = (index, url) => {
+      if (hexagons[index].items.length < 3)
+      {
+        const updatedHexagons = [...hexagons];
+        updatedHexagons[index].items.push(url);
+        setHexagons(updatedHexagons);
+      }
+      console.log(hexagons);
+    }
+
     const clearBoard = () => {
         const updatedHexagons = [...hexagons];
         for (let index = 0; index < hexagons.length; index++) {
-            updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false };
+            updatedHexagons[index] = { imageUrl: "", cost: 0, traits: null, stars: false, items: [] };
         }
         setHexagons(updatedHexagons);
     };
@@ -93,7 +103,7 @@ const Body = () => {
                   <button onClick={clearBoard}>Clear board</button>
                   <button>Clear items</button>
                 </div>
-                <Items data={data["items"]}/>
+                <Items data={data["items"]} updateItemsIndex={updateItemsIndex}/>
               </div>
             </>
           }

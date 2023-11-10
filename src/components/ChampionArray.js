@@ -32,6 +32,7 @@ const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
 
     useEffect(() => {
         sortByName();
+        // eslint-disable-next-line
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import gitLogo from "./assets/git_logo.png"
+import gitLogo from "../assets/git_logo.png"
 
 const Footer = () => {
     return (

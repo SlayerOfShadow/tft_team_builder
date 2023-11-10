@@ -290,3 +290,15 @@
   text-shadow: 3px 3px 5px black;
   user-select: none;
 }
+.champion-items {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.champion-item-icon {
+  width: 20px;
+  border: 1px solid var(--second-color);
+}

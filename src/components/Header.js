@@ -1,4 +1,4 @@
-import tftLogo from "./assets/tft_logo.png"
+import tftLogo from "../assets/tft_logo.png"
 
 const Header = () => {
     return (

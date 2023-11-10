@@ -13,6 +13,7 @@ const Board = ({ hexagons, updateBoardSwap, freeHexagon, setStars }) => {
                     freeHexagon={freeHexagon}
                     stars={hexagon.stars} 
                     setStars={setStars}
+                    items={hexagon.items}
                 />
             ))}
         </div>

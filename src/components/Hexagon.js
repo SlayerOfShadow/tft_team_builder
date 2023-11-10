@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars, setStars }) => {
+const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars, setStars, items }) => {
     const [showStars, setShowStars] = useState(false);
 
     const handleChampionClick = () => {
@@ -81,7 +81,7 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
                 <div className="hexagon-image" position={position} onDragOver={allowDrop}>
-                    {imageUrl && <img src={imageUrl} alt="" position={position} onClick={handleChampionClick} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
+                    {imageUrl && <img src={imageUrl} alt="" position={position} type="champion" onClick={handleChampionClick} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>
             {showStars && 
@@ -95,6 +95,15 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
                 onMouseLeave={handleMouseLeave}
                 >★★★
             </div>}
+            <div className="champion-items"
+            style={{
+                marginLeft: `${starsMarginLeft}px`,
+               }} >
+            {items.length > 0 &&
+                items.map((url, index) => (
+                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" />
+                ))}
+            </div>
         </div>
     );
 }

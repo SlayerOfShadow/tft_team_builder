@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-const Items = ({data}) => {
+const Items = ({data, updateItemsIndex}) => {
     const filterItems = (items) => {
         return items.filter(item => (
           (item.name !== "Guardian Angel" && item.composition.length > 0 &&
@@ -31,7 +31,7 @@ const Items = ({data}) => {
             </div>
             <div className="items">
                 {filterItems(data).map((item) => (
-                    <Item key={item.name} url={item.icon} />
+                    <Item key={item.name} url={item.icon} updateItemsIndex={updateItemsIndex}/>
                 ))}
             </div>
         </div>
