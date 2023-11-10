@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars, setStars, items }) => {
+const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars, setStars, items, removeItem }) => {
     const [showStars, setShowStars] = useState(false);
-
-    const handleChampionClick = () => {
-        freeHexagon(position);
-    };
 
     const handleMouseEnter = () => {
         setShowStars(true);
@@ -14,10 +10,6 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
       const handleMouseLeave = () => {
         if (stars === false) setShowStars(false);
       };
-
-    const handleStarsClick = () => {
-        setStars(position, !stars);
-    };
 
     const handleOnDragEnd = (event) => {
         const x = event.clientX;
@@ -29,7 +21,7 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (positionValue)
             {
-                updateBoardSwap(position, positionValue);
+                swapChampion(position, positionValue);
             }
         }
     };
@@ -81,7 +73,7 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
                 <div className="hexagon-image" position={position} onDragOver={allowDrop}>
-                    {imageUrl && <img src={imageUrl} alt="" position={position} type="champion" onClick={handleChampionClick} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
+                    {imageUrl && <img src={imageUrl} alt="champion-img" position={position} type="champion" onClick={() => removeChampion(position)} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
                 </div>
             </div>
             {showStars && 
@@ -90,7 +82,7 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
                      marginLeft: `${starsMarginLeft}px`,
                      color: stars ? '#f1d25e' : '#565f8a',
                     }} 
-                onClick={handleStarsClick} 
+                onClick={() => setStars(position, !stars)} 
                 onMouseEnter={handleMouseEnter} 
                 onMouseLeave={handleMouseLeave}
                 >★★★
@@ -101,7 +93,7 @@ const Hexagon = ({ position, imageUrl, cost, updateBoardSwap, freeHexagon, stars
                }} >
             {items.length > 0 &&
                 items.map((url, index) => (
-                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" />
+                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" onClick={() => removeItem(position, url)}/>
                 ))}
             </div>
         </div>

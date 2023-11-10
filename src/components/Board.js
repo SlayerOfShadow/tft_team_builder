@@ -1,6 +1,6 @@
 import Hexagon from "./Hexagon";
 
-const Board = ({ hexagons, updateBoardSwap, freeHexagon, setStars }) => {
+const Board = ({ hexagons, swapChampion, removeChampion, setStars, removeItem }) => {
     return (
         <div className="board">
             {hexagons.map((hexagon, index) => (
@@ -9,11 +9,12 @@ const Board = ({ hexagons, updateBoardSwap, freeHexagon, setStars }) => {
                     position={index} 
                     imageUrl={hexagon.imageUrl} 
                     cost={hexagon.cost} 
-                    updateBoardSwap={updateBoardSwap}
-                    freeHexagon={freeHexagon}
+                    swapChampion={swapChampion}
+                    removeChampion={removeChampion}
                     stars={hexagon.stars} 
                     setStars={setStars}
                     items={hexagon.items}
+                    removeItem={removeItem}
                 />
             ))}
         </div>

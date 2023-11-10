@@ -1,7 +1,7 @@
 import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
-const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
+const ChampionArray = ({ data, addChampion, dragChampion }) => {
     const filterUniqueChampions = (champions) => {
         const uniqueChampions = {};
         champions.forEach((champion) => {
@@ -26,10 +26,6 @@ const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
         setIsSortedByName(false);
     };
 
-    const clearSearch = () => {
-        setSearchText("");
-    };
-
     useEffect(() => {
         sortByName();
         // eslint-disable-next-line
@@ -40,7 +36,7 @@ const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
             <div className="sort-champions">
                 <input type="text" placeholder="Search champion..." maxLength={100} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
                 <div className="sort-buttons">
-                    {searchText && <button onClick={clearSearch} className="clear-search-button">✕</button>}
+                    {searchText && <button onClick={() => setSearchText("")} className="clear-search-button">✕</button>}
                     <button onClick={sortByName} className={isSortedByName ? "selected-button" : ""}>A-Z</button>
                     <button onClick={sortByCost} className={isSortedByName ? "" : "selected-button"}>Cost &darr;</button>
                 </div>
@@ -54,8 +50,8 @@ const ChampionArray = ({ data, updateBoard, updateBoardIndex }) => {
                         cost={champion.cost}
                         traits={champion.traits}
                         opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
-                        updateBoard={updateBoard}
-                        updateBoardIndex={updateBoardIndex}
+                        addChampion={addChampion}
+                        dragChampion={dragChampion}
                     />
                 ))}
             </div>

@@ -1,7 +1,7 @@
-const Item = ({url, updateItemsIndex, opacity}) => {
+const Item = ({url, addItem, opacity}) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
-    const handleOnDragEnd = (event) => {
+    const handleItemOnDragEnd = (event) => {
         const x = event.clientX;
         const y = event.clientY;
     
@@ -12,7 +12,7 @@ const Item = ({url, updateItemsIndex, opacity}) => {
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (type === "champion")
             {
-                updateItemsIndex(positionValue, imageUrl);
+                addItem(positionValue, imageUrl);
             }
         }
     };
@@ -22,7 +22,7 @@ const Item = ({url, updateItemsIndex, opacity}) => {
             <img
                 src={imageUrl} 
                 alt="item-icon"
-                onDragEnd={handleOnDragEnd}
+                onDragEnd={handleItemOnDragEnd}
             />
         </div>
      );

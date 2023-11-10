@@ -1,4 +1,4 @@
-const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex }) => {
+const Champion = ({ url, cost, traits, opacity, addChampion, dragChampion }) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const borderStyle = {
@@ -25,11 +25,7 @@ const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex })
             break;
     }
 
-    const handleChampionClick = () => {
-        updateBoard(imageUrl, cost, traits);
-    };
-
-    const handleOnDragEnd = (event) => {
+    const handleChampionOnDragEnd = (event) => {
         const x = event.clientX;
         const y = event.clientY;
     
@@ -39,7 +35,7 @@ const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex })
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (positionValue)
             {
-                updateBoardIndex(positionValue, imageUrl, cost, traits);
+                dragChampion(positionValue, imageUrl, cost, traits);
             }
         }
     };
@@ -51,8 +47,8 @@ const Champion = ({ url, cost, traits, opacity, updateBoard, updateBoardIndex })
                 alt="champion-icon" 
                 type="Champion" 
                 style={borderStyle} 
-                onClick={handleChampionClick}
-                onDragEnd={handleOnDragEnd}
+                onClick={() => addChampion(imageUrl, cost, traits)}
+                onDragEnd={handleChampionOnDragEnd}
             />
         </div>
     );
