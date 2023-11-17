@@ -93,7 +93,7 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
                }} >
             {items.length > 0 &&
                 items.map((url, index) => (
-                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" onClick={() => removeItem(position, url)}/>
+                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" onClick={() => removeItem(position, index)}/>
                 ))}
             </div>
         </div>

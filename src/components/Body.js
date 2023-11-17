@@ -59,15 +59,20 @@ const Body = () => {
       }
     }
 
-    const removeItem = (index, url) => {
+    const removeItem = (position, index) => {
       const updatedHexagons = [...hexagons];
-      const itemIndex = updatedHexagons[index].items.indexOf(url);
-    
-      if (itemIndex >= 0) {
-        updatedHexagons[index].items.splice(itemIndex, 1);
-        setHexagons(updatedHexagons);
-      }
+      updatedHexagons[position].items.splice(index, 1);
+      setHexagons(updatedHexagons);
     }
+
+    const removeAllItems = () => {
+      const updatedHexagons = hexagons.map(hexagon => ({
+        ...hexagon,
+        items: []
+      }));
+      setHexagons(updatedHexagons);
+    };
+    
 
     useEffect(() => {
         const traitsMap = new Map();
@@ -110,7 +115,7 @@ const Body = () => {
               <div className="buttons-and-items">
                 <div className="clear-buttons">
                   <button onClick={clearBoard}>Clear board</button>
-                  <button>Clear items</button>
+                  <button onClick={removeAllItems}>Clear items</button>
                 </div>
                 <Items data={data["items"]} addItem={addItem}/>
               </div>
