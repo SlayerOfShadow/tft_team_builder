@@ -2,15 +2,12 @@ import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
 const ChampionArray = ({ data, addChampion, dragChampion }) => {
-    const filterUniqueChampions = (champions) => {
-        const uniqueChampions = {};
-        champions.forEach((champion) => {
-            uniqueChampions[champion.characterName] = champion;
-        });
-        return Object.values(uniqueChampions);
+    const filterChampions = (champions) => {
+        const championsWithTraits = champions.filter(champion => champion.traits.length > 0 && champion.cost <= 5);
+        return Object.values(championsWithTraits);
     };
 
-    const [sortedChampions, setSortedChampions] = useState(filterUniqueChampions(data));
+    const [sortedChampions, setSortedChampions] = useState(filterChampions(data));
     const [isSortedByName, setIsSortedByName] = useState(false);
     const [searchText, setSearchText] = useState("");
 
@@ -46,7 +43,7 @@ const ChampionArray = ({ data, addChampion, dragChampion }) => {
                     champion.traits.length > 0 &&
                     <Champion
                         key={champion.apiName}
-                        url={champion.squareIcon}
+                        url={champion.tileIcon}
                         cost={champion.cost}
                         traits={champion.traits}
                         opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}

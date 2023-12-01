@@ -26,9 +26,11 @@ const Trait = ({ trait, count, imageUrl, traitData, currentStyle }) => {
             case 3:
                 return { backgroundColor: 'rgb(120, 140, 150)' };
             case 4:
-                return { backgroundColor: 'rgb(200, 170, 60)' };
+                return { backgroundColor: 'rgb(220, 180, 50)' };
             case 5:
-                return { backgroundColor: 'rgb(210, 210, 240)' };
+                return { backgroundColor: 'rgb(200, 200, 240)' };
+            case 6:
+                return { backgroundColor: 'rgb(200, 100, 100)' };
             default:
                 return;
         }

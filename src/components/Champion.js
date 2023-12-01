@@ -1,5 +1,5 @@
 const Champion = ({ url, cost, traits, opacity, addChampion, dragChampion }) => {
-    const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
+    const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(/\.(tex|dds)$/, ".png");
 
     const borderStyle = {
         border: "1px solid",

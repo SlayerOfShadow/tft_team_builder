@@ -1,0 +1,7 @@
+todo :
+
+mettre à jour vers set 10
+pouvoir déplacer les items d'un champion à un autre
+faire en sorte qu'on puisse mettre qu'une fois les items unique
+quand on met un emblème mettre +1 à la synergie
+pas pouvoir mettre un emblem sur une unité qui a déjà la synergie

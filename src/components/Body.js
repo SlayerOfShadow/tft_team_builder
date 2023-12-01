@@ -6,7 +6,7 @@ import Traits from "./Traits";
 import Items from "./Items";
 
 const Body = () => {
-    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.21/cdragon/tft/en_us.json");
+    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.23/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
     
@@ -109,9 +109,9 @@ const Body = () => {
         <div className="body">
           {data && 
             <>
-              <Traits traits={traits} traitsData={data["setData"]["0"]["traits"]} />
+              <Traits traits={traits} traitsData={data["sets"]["10"]["traits"]} />
               <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem}/>
-              <ChampionArray data={data["setData"]["0"]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
+              <ChampionArray data={data["sets"]["10"]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">
                   <button onClick={clearBoard}>Clear board</button>

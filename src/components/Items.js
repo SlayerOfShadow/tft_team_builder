@@ -5,27 +5,39 @@ const Items = ({data, addItem}) => {
     const [searchText, setSearchText] = useState("");
 
     const filterItems = (items) => {
-        return items.filter(item => (
-          (item.name !== "Guardian Angel" && item.composition.length > 0 &&
-          item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Standard/")) || item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set9/")
-        )).sort((item1, item2) => {
-          const isItem1Spatula = item1.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set9/");
-          const isItem2Spatula = item2.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set9/");
+      const uniqueIcons = new Set();
+      
+      return items.filter(item => {
+        const isStandardIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Standard/");
+        const isSpatulaIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
     
-          if (isItem1Spatula && !isItem2Spatula) {
-            return -1;
-          } else if (!isItem1Spatula && isItem2Spatula) {
-            return 1;
-          } else if (isItem1Spatula && isItem2Spatula) {
-            const compositionDiff = item1.composition.length - item2.composition.length;
-            if (compositionDiff !== 0) {
-              return compositionDiff;
-            }
+        if ((item.name !== "Guardian Angel" && item.composition.length > 0 && isStandardIcon) || isSpatulaIcon) {
+          if (!uniqueIcons.has(item.icon)) {
+            uniqueIcons.add(item.icon);
+            return true;
           }
-  
-          return item1.name.localeCompare(item2.name);
-        });
-      }
+        }
+    
+        return false;
+      }).sort((item1, item2) => {
+        const isItem1Spatula = item1.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
+        const isItem2Spatula = item2.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
+    
+        if (isItem1Spatula && !isItem2Spatula) {
+          return -1;
+        } else if (!isItem1Spatula && isItem2Spatula) {
+          return 1;
+        } else if (isItem1Spatula && isItem2Spatula) {
+          const compositionDiff = item1.composition.length - item2.composition.length;
+          if (compositionDiff !== 0) {
+            return compositionDiff;
+          }
+        }
+    
+        return item1.name.localeCompare(item2.name);
+      });
+    };
+    
       
     return (
         <div className="items-array">
