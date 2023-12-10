@@ -1,7 +1,7 @@
 import Item from "./Item";
 import { useState } from "react";
 
-const Items = ({data, addItem}) => {
+const Items = ({data, addItem, currentSet}) => {
     const [searchText, setSearchText] = useState("");
 
     const filterItems = (items) => {
@@ -9,7 +9,7 @@ const Items = ({data, addItem}) => {
       
       return items.filter(item => {
         const isStandardIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Standard/");
-        const isSpatulaIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
+        const isSpatulaIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set" + currentSet + "/");
     
         if ((item.name !== "Guardian Angel" && item.composition.length > 0 && isStandardIcon) || isSpatulaIcon) {
           if (!uniqueIcons.has(item.icon)) {
@@ -20,8 +20,8 @@ const Items = ({data, addItem}) => {
     
         return false;
       }).sort((item1, item2) => {
-        const isItem1Spatula = item1.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
-        const isItem2Spatula = item2.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set10/");
+        const isItem1Spatula = item1.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set" + currentSet + "/");
+        const isItem2Spatula = item2.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set" + currentSet + "/");
     
         if (isItem1Spatula && !isItem2Spatula) {
           return -1;
@@ -51,6 +51,7 @@ const Items = ({data, addItem}) => {
                       key={item.name} 
                       url={item.icon} 
                       addItem={addItem}
+                      unique={item.unique}
                       opacity={item.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
                     />
                 ))}

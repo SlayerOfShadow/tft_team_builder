@@ -6,11 +6,12 @@ import Traits from "./Traits";
 import Items from "./Items";
 
 const Body = () => {
-    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/13.23/cdragon/tft/en_us.json");
+    const currentSet = "10";
+    const currentPatch = "13.24";
+
+    const { data, isPending, error } = useFetch("https://raw.communitydragon.org/" + currentPatch + "/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
-    
-    const currentSet = "10";
 
     const addChampion = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
@@ -52,13 +53,19 @@ const Body = () => {
         setHexagons(updatedHexagons);
     }
 
-    const addItem = (index, url) => {
-      if (hexagons[index].items.length < 3)
-      {
-        const updatedHexagons = [...hexagons];
-        updatedHexagons[index].items.push(url);
-        setHexagons(updatedHexagons);
+    const addItem = (index, url, unique) => {
+      if (unique && hexagons[index].items.some(item => item.url === url)) {
+        return false;
       }
+
+      if (hexagons[index].items.length < 3) {
+        const updatedHexagons = [...hexagons];
+        updatedHexagons[index].items.push({ url: url, unique: unique });
+        setHexagons(updatedHexagons);
+        return true;
+      }
+
+      return false;
     }
 
     const removeItem = (position, index) => {
@@ -67,11 +74,11 @@ const Body = () => {
       setHexagons(updatedHexagons);
     }
 
-    const swapItem = (index, targetIndex, itemIndex, url) => {
+    const swapItem = (index, targetIndex, itemIndex, url, unique) => {
       if (hexagons[targetIndex].items.length < 3)
       {
-        removeItem(index, itemIndex);
-        addItem(targetIndex, url);
+        const itemAdded = addItem(targetIndex, url, unique);
+        if (itemAdded) removeItem(index, itemIndex);
       }
     }
 
@@ -126,7 +133,7 @@ const Body = () => {
                   <button onClick={clearBoard}>Clear board</button>
                   <button onClick={removeAllItems}>Clear items</button>
                 </div>
-                <Items data={data["items"]} addItem={addItem}/>
+                <Items data={data["items"]} addItem={addItem} currentSet={currentSet}/>
               </div>
             </>
           }

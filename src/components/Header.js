@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <div className="header">
             <img src={tftLogo} alt="" />
-            <h2>Set 9.5</h2>
+            <h2>Set 10</h2>
         </div>
     );
 }
