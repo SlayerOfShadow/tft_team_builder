@@ -12,6 +12,24 @@ const Body = () => {
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/" + currentPatch + "/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
+    const [traitsOrder, setTraitsOrder] = useState(new Map());
+
+    const createTraitsOrder = () => {
+      const championsData = data["sets"][currentSet]["champions"];
+      const traitsMap = new Map();
+
+      championsData.forEach((champion) => {
+        const { traits } = champion;
+    
+        traits.forEach((trait, index) => {
+          if (!traitsMap.has(trait)) {
+            traitsMap.set(trait, index);
+          }
+        });
+      });
+
+      setTraitsOrder(traitsMap);
+    };
 
     const addChampion = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
@@ -102,17 +120,22 @@ const Body = () => {
     };
 
     useEffect(() => {
+      if (data !== null) createTraitsOrder();
+      // eslint-disable-next-line
+    }, [data]);
+
+    useEffect(() => {
       const updatedTraits = new Map();
       const processedUrls = new Set();
-
+    
       hexagons.forEach(hexagon => {
-          if (hexagon.traits) {
-            if (!processedUrls.has(hexagon.imageUrl)) {
-              hexagon.traits.forEach(trait => {
-                updatedTraits.set(trait, (updatedTraits.get(trait) || 0) + 1);
-              });
-              processedUrls.add(hexagon.imageUrl);
-            }
+        if (hexagon.traits) {
+          if (!processedUrls.has(hexagon.imageUrl)) {
+            hexagon.traits.forEach(trait => {
+              updatedTraits.set(trait, (updatedTraits.get(trait) || 0) + 1);
+            });
+            processedUrls.add(hexagon.imageUrl);
+          }
     
           hexagon.items.forEach(item => {
             if (item.trait !== null) {
@@ -122,8 +145,20 @@ const Body = () => {
         }
       });
     
-      setTraits(updatedTraits);
-    }, [hexagons]);
+      const sortedTraits = new Map([...updatedTraits.entries()].sort(([traitA, countA], [traitB, countB]) => {
+        const priorityA = traitsOrder.get(traitA) || 0;
+        const priorityB = traitsOrder.get(traitB) || 0;
+    
+        if (priorityA !== priorityB) {
+          return priorityA - priorityB;
+        } else {
+          return traitA.localeCompare(traitB);
+        }
+      }));
+    
+      setTraits(sortedTraits);
+    }, [hexagons, traitsOrder]);
+    
 
     return (
         <div className="body">
