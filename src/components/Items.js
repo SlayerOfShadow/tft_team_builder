@@ -48,10 +48,11 @@ const Items = ({data, addItem, currentSet}) => {
             <div className="items">
                 {filterItems(data).map((item) => (
                     <Item 
-                      key={item.name} 
+                      key={item.name}
+                      name={item.name}
                       url={item.icon} 
-                      addItem={addItem}
                       unique={item.unique}
+                      addItem={addItem}
                       opacity={item.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
                     />
                 ))}

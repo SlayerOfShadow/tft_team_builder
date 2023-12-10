@@ -53,14 +53,21 @@ const Body = () => {
         setHexagons(updatedHexagons);
     }
 
-    const addItem = (index, url, unique) => {
+    const addItem = (index, name, url, unique) => {
+      const maxItems = (name === "Thief's Gloves" ? 1 : 3);
+
+      if (hexagons[index].items.length === 1 && hexagons[index].items[0].name === "Thief's Gloves")
+      {
+        return false;
+      }
+
       if (unique && hexagons[index].items.some(item => item.url === url)) {
         return false;
       }
 
-      if (hexagons[index].items.length < 3) {
+      if (hexagons[index].items.length < maxItems) {
         const updatedHexagons = [...hexagons];
-        updatedHexagons[index].items.push({ url: url, unique: unique });
+        updatedHexagons[index].items.push({ name: name, url: url, unique: unique });
         setHexagons(updatedHexagons);
         return true;
       }
@@ -74,10 +81,10 @@ const Body = () => {
       setHexagons(updatedHexagons);
     }
 
-    const swapItem = (index, targetIndex, itemIndex, url, unique) => {
+    const swapItem = (index, targetIndex, itemIndex, name, url, unique) => {
       if (hexagons[targetIndex].items.length < 3)
       {
-        const itemAdded = addItem(targetIndex, url, unique);
+        const itemAdded = addItem(targetIndex, name, url, unique);
         if (itemAdded) removeItem(index, itemIndex);
       }
     }

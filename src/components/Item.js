@@ -1,4 +1,4 @@
-const Item = ({url, addItem, unique, opacity}) => {
+const Item = ({name, url, unique, addItem, opacity}) => {
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(".tex", ".png");
 
     const handleItemOnDragEnd = (event) => {
@@ -12,7 +12,7 @@ const Item = ({url, addItem, unique, opacity}) => {
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (type === "champion")
             {
-                addItem(positionValue, imageUrl, unique);
+                addItem(positionValue, name, imageUrl, unique);
             }
         }
     };
