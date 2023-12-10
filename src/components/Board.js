@@ -1,6 +1,6 @@
 import Hexagon from "./Hexagon";
 
-const Board = ({ hexagons, swapChampion, removeChampion, setStars, removeItem }) => {
+const Board = ({ hexagons, swapChampion, removeChampion, setStars, removeItem, swapItem }) => {
     return (
         <div className="board">
             {hexagons.map((hexagon, index) => (
@@ -15,6 +15,7 @@ const Board = ({ hexagons, swapChampion, removeChampion, setStars, removeItem })
                     setStars={setStars}
                     items={hexagon.items}
                     removeItem={removeItem}
+                    swapItem={swapItem}
                 />
             ))}
         </div>

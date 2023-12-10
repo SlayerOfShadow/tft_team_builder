@@ -10,6 +10,8 @@ const Body = () => {
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
     
+    const currentSet = "10";
+
     const addChampion = (imageUrl, cost, traits) => {
         const updatedHexagons = [...hexagons];
         const index = hexagons.findIndex(hexagon => hexagon.cost === 0);
@@ -65,6 +67,14 @@ const Body = () => {
       setHexagons(updatedHexagons);
     }
 
+    const swapItem = (index, targetIndex, itemIndex, url) => {
+      if (hexagons[targetIndex].items.length < 3)
+      {
+        removeItem(index, itemIndex);
+        addItem(targetIndex, url);
+      }
+    }
+
     const removeAllItems = () => {
       const updatedHexagons = hexagons.map(hexagon => ({
         ...hexagon,
@@ -72,7 +82,6 @@ const Body = () => {
       }));
       setHexagons(updatedHexagons);
     };
-    
 
     useEffect(() => {
         const traitsMap = new Map();
@@ -109,9 +118,9 @@ const Body = () => {
         <div className="body">
           {data && 
             <>
-              <Traits traits={traits} traitsData={data["sets"]["10"]["traits"]} />
-              <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem}/>
-              <ChampionArray data={data["sets"]["10"]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
+              <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
+              <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem} swapItem={swapItem}/>
+              <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
               <div className="buttons-and-items">
                 <div className="clear-buttons">
                   <button onClick={clearBoard}>Clear board</button>

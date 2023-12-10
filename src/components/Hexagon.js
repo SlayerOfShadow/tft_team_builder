@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars, setStars, items, removeItem }) => {
+const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars, setStars, items, removeItem, swapItem }) => {
     const [showStars, setShowStars] = useState(false);
 
     const handleMouseEnter = () => {
@@ -22,6 +22,22 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
             if (positionValue)
             {
                 swapChampion(position, positionValue);
+            }
+        }
+    };
+
+    const handleItemOnDragEnd = (event, index, url) => {
+        const x = event.clientX;
+        const y = event.clientY;
+
+        const elementAtDragEnd = document.elementFromPoint(x, y);
+    
+        if (elementAtDragEnd) {
+            const type = elementAtDragEnd.getAttribute("type");
+            const positionValue = elementAtDragEnd.getAttribute("position");
+            if (type === "champion")
+            {
+                swapItem(position, positionValue, index, url);
             }
         }
     };
@@ -93,7 +109,13 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
                }} >
             {items.length > 0 &&
                 items.map((url, index) => (
-                    <img className="champion-item-icon" key={index} src={url} alt="champion-item-icon" onClick={() => removeItem(position, index)}/>
+                    <img className="champion-item-icon" 
+                        key={index} 
+                        src={url} 
+                        alt="champion-item-icon" 
+                        onClick={() => removeItem(position, index)}
+                        onDragEnd={(event) => handleItemOnDragEnd(event, index, url)}
+                    />
                 ))}
             </div>
         </div>

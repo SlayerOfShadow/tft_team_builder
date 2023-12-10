@@ -1,7 +1,8 @@
 TODO :
 
-- move items from one champion to another
 - only one unique item per champion
 - thief gloves occupies all items slots
 - add +1 to corresponding trait of the emblem
 - not be able to put emblem to champion who already has the trait
+- traits filter not that good
+- css
