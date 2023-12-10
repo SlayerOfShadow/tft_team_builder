@@ -26,7 +26,7 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
         }
     };
 
-    const handleItemOnDragEnd = (event, index, name, url, unique) => {
+    const handleItemOnDragEnd = (event, index, name, url, unique, trait) => {
         const x = event.clientX;
         const y = event.clientY;
 
@@ -37,7 +37,7 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
             const positionValue = elementAtDragEnd.getAttribute("position");
             if (type === "champion")
             {
-                swapItem(position, positionValue, index, name, url, unique);
+                swapItem(position, positionValue, index, name, url, unique, trait);
             }
         }
     };
@@ -114,7 +114,7 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
                         src={item.url} 
                         alt="champion-item-icon" 
                         onClick={() => removeItem(position, index)}
-                        onDragEnd={(event) => handleItemOnDragEnd(event, index, item.name, item.url, item.unique)}
+                        onDragEnd={(event) => handleItemOnDragEnd(event, index, item.name, item.url, item.unique, item.trait)}
                     />
                 ))}
             </div>

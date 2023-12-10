@@ -53,7 +53,7 @@ const Body = () => {
         setHexagons(updatedHexagons);
     }
 
-    const addItem = (index, name, url, unique) => {
+    const addItem = (index, name, url, unique, trait) => {
       const maxItems = (name === "Thief's Gloves" ? 1 : 3);
 
       if (hexagons[index].items.length === 1 && hexagons[index].items[0].name === "Thief's Gloves")
@@ -65,9 +65,13 @@ const Body = () => {
         return false;
       }
 
+      if (trait !== null && hexagons[index].traits.includes(trait)) {
+        return false;
+      }
+      
       if (hexagons[index].items.length < maxItems) {
         const updatedHexagons = [...hexagons];
-        updatedHexagons[index].items.push({ name: name, url: url, unique: unique });
+        updatedHexagons[index].items.push({ name: name, url: url, unique: unique, trait });
         setHexagons(updatedHexagons);
         return true;
       }
@@ -81,10 +85,10 @@ const Body = () => {
       setHexagons(updatedHexagons);
     }
 
-    const swapItem = (index, targetIndex, itemIndex, name, url, unique) => {
+    const swapItem = (index, targetIndex, itemIndex, name, url, unique, trait) => {
       if (hexagons[targetIndex].items.length < 3)
       {
-        const itemAdded = addItem(targetIndex, name, url, unique);
+        const itemAdded = addItem(targetIndex, name, url, unique, trait);
         if (itemAdded) removeItem(index, itemIndex);
       }
     }
@@ -98,34 +102,27 @@ const Body = () => {
     };
 
     useEffect(() => {
-        const traitsMap = new Map();
-        const traitsOrder = new Map();
-        const processedUrls = new Set();
+      const updatedTraits = new Map();
+      const processedUrls = new Set();
 
-        hexagons.forEach(hexagon => {
+      hexagons.forEach(hexagon => {
           if (hexagon.traits) {
-              if (!processedUrls.has(hexagon.imageUrl)) {
-                  hexagon.traits.forEach((trait, index) => {
-                      traitsMap.set(trait, (traitsMap.get(trait) || 0) + 1);
-                      traitsOrder.set(trait, index);
-                  });
-                  processedUrls.add(hexagon.imageUrl);
-              }
-          }
-      });
-
-      const sortedTraits = [...traitsMap.entries()].sort((a, b) => {
-        const indexA = traitsOrder.get(a[0]);
-        const indexB = traitsOrder.get(b[0]);
-        
-        if (indexA !== indexB) {
-          return indexA - indexB;
-        }
+            if (!processedUrls.has(hexagon.imageUrl)) {
+              hexagon.traits.forEach(trait => {
+                updatedTraits.set(trait, (updatedTraits.get(trait) || 0) + 1);
+              });
+              processedUrls.add(hexagon.imageUrl);
+            }
     
-        return a[0].localeCompare(b[0]);
+          hexagon.items.forEach(item => {
+            if (item.trait !== null) {
+              updatedTraits.set(item.trait, (updatedTraits.get(item.trait) || 0) + 1);
+            }
+          });
+        }
       });
-
-      setTraits(sortedTraits);
+    
+      setTraits(updatedTraits);
     }, [hexagons]);
 
     return (

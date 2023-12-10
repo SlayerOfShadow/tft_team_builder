@@ -38,7 +38,16 @@ const Items = ({data, addItem, currentSet}) => {
       });
     };
     
-      
+    const itemTrait = (name) => {
+      const match = name.match(/^(.*?)\s*Emblem$/);
+    
+      if (match) {
+        return match[1];
+      } else {
+        return null;
+      }
+    };
+
     return (
         <div className="items-array">
             <div className="sort-items">
@@ -52,6 +61,7 @@ const Items = ({data, addItem, currentSet}) => {
                       name={item.name}
                       url={item.icon} 
                       unique={item.unique}
+                      trait={itemTrait(item.name)}
                       addItem={addItem}
                       opacity={item.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
                     />
