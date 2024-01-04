@@ -1,3 +1,5 @@
 TODO :
 
-- headliner option
+- link firebase
+- create account and put them in database
+- users can save comps
