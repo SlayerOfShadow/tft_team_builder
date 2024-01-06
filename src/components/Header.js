@@ -3,32 +3,37 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const { authState } = useContext(AuthContext);
     const auth = getAuth();
+    const navigate = useNavigate();
 
     const userSignOut = () => {
         signOut(auth)
           .then(() => {
             console.log("Signed out successfully");
+            navigate("/");
           })
           .catch((error) => console.log(error));
       };
 
     return (
         <div className="header">
-            <h1><Link to="/" className="home-link">Home</Link></h1>
+            <div className="header-left">
+                <h1><Link to="/" className="home-link">Home</Link></h1>
+                {authState && <h1><Link to="/compositions" className="compositions-link">Compositions</Link></h1>}
+            </div>
             <img src={tftLogo} alt="" />
+            <div className="header-right">
             {authState ? (
-            <>
-                <div>
+                <>
                     <h2>Welcome {authState.email}</h2>
                     <button onClick={userSignOut}>Log out</button>
-                </div>
-            </>
+                </>
             ) : (
-            <h1 className="login-register">
+            <h1>
                 <Link to="/login" className="login-link">
                 Log in
                 </Link>
@@ -38,6 +43,8 @@ const Header = () => {
                 </Link>
             </h1>
             )}
+            </div>
+            
         </div>
     );
 }

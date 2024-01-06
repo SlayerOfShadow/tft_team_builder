@@ -3,6 +3,7 @@ import Body from './Body';
 import Footer from './Footer';
 import Login from './Login';
 import Register from './Register';
+import Compositions from './Compositions';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from '../utils/AuthContext';
 
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Body />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/register' element={<Register />}/>
+            <Route path='/compositions' element={<Compositions />}/>
           </Routes>
           <Footer />
         </Router>

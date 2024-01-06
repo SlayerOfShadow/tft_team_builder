@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,10 +27,37 @@ const db = getFirestore(app);
 
 const createUserDocument = async (obj) => {
     const usersRef = collection(db, "users");
-    await setDoc(doc(usersRef), {
+    await setDoc(doc(usersRef, obj.user.uid), {
         id : obj.user.uid,
         email: obj.user.email
     });
 }
 
-export { auth, createUserDocument };
+const saveComposition = async (userId, name, compositionData) => {
+  const compositionsRef = collection(db, "compositions");
+    await setDoc(doc(compositionsRef), {
+      userId: userId,
+      name: name,
+      compositionData: compositionData
+    });
+};
+
+const getCompositions = async (userId) => {
+  try {
+    const compositionsRef = collection(db, "compositions");
+    const q = query(compositionsRef, where("userId", "==", userId));
+
+    const compositions = [];
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      compositions.push({ id: doc.id, ...doc.data() });
+    });
+
+    return compositions;
+  } catch (error) {
+    console.error("Error getting compositions:", error);
+    throw error;
+  }
+};
+
+export { auth, createUserDocument, saveComposition, getCompositions };

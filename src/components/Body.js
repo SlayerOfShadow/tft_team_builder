@@ -4,6 +4,9 @@ import Board from "./Board";
 import { useState, useEffect } from "react";
 import Traits from "./Traits";
 import Items from "./Items";
+import { useContext } from "react";
+import { AuthContext } from "../utils/AuthContext";
+import { saveComposition } from "../firebase/firebase";
 
 const Body = () => {
     const currentSet = "10";
@@ -13,6 +16,9 @@ const Body = () => {
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
     const [traits, setTraits] = useState(new Map());
     const [traitsOrder, setTraitsOrder] = useState(new Map());
+    const [compositionName, setCompositionName] = useState("");
+
+    const { authState } = useContext(AuthContext);
 
     const createTraitsOrder = () => {
       const championsData = data["sets"][currentSet]["champions"];
@@ -119,6 +125,13 @@ const Body = () => {
       setHexagons(updatedHexagons);
     };
 
+    const handleSaveComposition = () => {
+      if (compositionName.length > 0)
+      {
+        saveComposition(authState.uid, compositionName, hexagons);
+      }
+    }
+
     useEffect(() => {
       if (data !== null) createTraitsOrder();
       // eslint-disable-next-line
@@ -164,11 +177,23 @@ const Body = () => {
         <div className="body">
           {data && 
             <>
-              <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
+              <div className="name-and-traits">
+                <div className="comp-div"> 
+                  { authState ? (
+                    <>
+                      <input type="text" placeholder="Composition name..." maxLength={50} value={compositionName} onChange={(e) => setCompositionName(e.target.value)}/>
+                      <button onClick={handleSaveComposition}>Save</button>
+                    </>
+                  ) : (
+                    <h2>Log in to save your composition</h2>
+                  )}
+                 </div>
+                <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
+              </div>
               <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem} swapItem={swapItem}/>
               <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
               <div className="buttons-and-items">
-                <div className="clear-buttons">
+                <div>
                   <button onClick={clearBoard}>Clear board</button>
                   <button onClick={removeAllItems}>Clear items</button>
                 </div>
