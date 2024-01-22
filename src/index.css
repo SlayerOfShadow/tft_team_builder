@@ -88,7 +88,7 @@ input::placeholder {
 }
 
 /* LOGIN & REGISTER */
-.register, .login, .compositions {
+.register, .login {
   min-height: 60vh;
   display: flex;
   justify-content: center;
@@ -231,7 +231,7 @@ input::placeholder {
   flex-direction: column;
   align-items: center;
 }
-.buttons-and-items button, .comp-div button {
+.buttons-and-items button, .comp-div button, .composition-card button {
   background-color: var(--fifth-color);
   padding: 5px 10px;
   color: white;
@@ -239,8 +239,9 @@ input::placeholder {
   border: 1px solid var(--second-color);
   cursor: pointer;
   margin: 0 5px 0 5px;
+
 }
-.buttons-and-items button:hover, .comp-div button:hover {
+.buttons-and-items button:hover, .comp-div button:hover, .composition-card button:hover {
   background-color: var(--third-color);
 }
 .clear-buttons {
@@ -412,4 +413,43 @@ button.clear-search-items-button:hover {
 .champion-item-icon {
   width: 20px;
   border: 1px solid var(--second-color);
+}
+
+/* COMPOSITIONS */
+
+.compositions {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.composition-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.composition-card-block {
+  padding: 15px;
+  border: 1px solid var(--second-color);
+  width: 496px;
+  font-size: 1.25em;
+  background-color: var(--fourth-color);
+  margin-right: 15px;
+}
+
+.composition-card-block p {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.composition-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.composition-card-block img {
+  width: 50px;
+  margin: 5px;
 }

@@ -10,7 +10,7 @@ import { saveComposition } from "../firebase/firebase";
 
 const Body = () => {
     const currentSet = "10";
-    const currentPatch = "13.24";
+    const currentPatch = "14.1";
 
     const { data, isPending, error } = useFetch("https://raw.communitydragon.org/" + currentPatch + "/cdragon/tft/en_us.json");
     const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));

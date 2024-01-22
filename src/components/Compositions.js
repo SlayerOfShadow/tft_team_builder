@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../utils/AuthContext";
 import { getCompositions } from "../firebase/firebase";
+import Composition from "./Composition";
 
 const Compositions = () => {
     const { authState } = useContext(AuthContext);
@@ -21,11 +22,12 @@ const Compositions = () => {
         
     return (
         <div className="compositions">
-          <ul>
-            {userCompositions.map((composition) => (
-              <li key={composition.id}>{composition.name}</li>
+          {userCompositions.map((composition) => (
+              <Composition
+                name={composition.name}
+                data={composition.compositionData}
+              />
             ))}
-          </ul>
         </div>
       );
 }
