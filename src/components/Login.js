@@ -2,32 +2,37 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
 
     const navigate = useNavigate();
 
     const login = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log(userCredential);
-            navigate("/")
-        })
-        .catch((error) => {
-            console.log(error);
-            setError("Couldn't log you in");
-        });
-      };
+            .then((userCredential) => {
+                toast.success("Successfully logged in", {
+                    position: "top-center"
+                  });
+                console.log(userCredential);
+                navigate("/")
+            })
+            .catch((error) => {
+                toast.error("Couldn't log you in", {
+                    position: "top-center"
+                  });
+                console.log(error);
+            });
+    };
 
-    return ( 
+    return (
         <div className="login">
             <form onSubmit={login} className="login-form">
                 <h1>Log in to your account</h1>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <input
                     type="email"
                     placeholder="Enter your email"
@@ -45,7 +50,7 @@ const Login = () => {
                 <button type="submit">Log in</button>
             </form>
         </div>
-     );
+    );
 }
- 
+
 export default Login;

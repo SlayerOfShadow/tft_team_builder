@@ -28,13 +28,12 @@ const Champion = ({ url, cost, traits, opacity, addChampion, dragChampion }) => 
     const handleChampionOnDragEnd = (event) => {
         const x = event.clientX;
         const y = event.clientY;
-    
+
         const elementAtDragEnd = document.elementFromPoint(x, y);
-    
+
         if (elementAtDragEnd) {
             const positionValue = elementAtDragEnd.getAttribute("position");
-            if (positionValue)
-            {
+            if (positionValue) {
                 dragChampion(positionValue, imageUrl, cost, traits);
             }
         }
@@ -43,10 +42,10 @@ const Champion = ({ url, cost, traits, opacity, addChampion, dragChampion }) => 
     return (
         <div className="champion-card" style={{ opacity: opacity }} >
             <img
-                src={imageUrl} 
-                alt="champion-icon" 
-                type="Champion" 
-                style={borderStyle} 
+                src={imageUrl}
+                alt="champion-icon"
+                type="Champion"
+                style={borderStyle}
                 onClick={() => addChampion(imageUrl, cost, traits)}
                 onDragEnd={handleChampionOnDragEnd}
             />

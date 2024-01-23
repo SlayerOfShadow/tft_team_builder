@@ -1,12 +1,9 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, query, where } from "firebase/firestore";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAQOlSGD3Kn7wkiXTLX0-RjCRecQLp5c8o",
   authDomain: "tft-team-builder-2a6d9.firebaseapp.com",
@@ -17,29 +14,52 @@ const firebaseConfig = {
   measurementId: "G-VMJVJLVNHH"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
-
 const db = getFirestore(app);
 
 const createUserDocument = async (obj) => {
-    const usersRef = collection(db, "users");
-    await setDoc(doc(usersRef, obj.user.uid), {
-        id : obj.user.uid,
-        email: obj.user.email
-    });
+  const usersRef = collection(db, "users");
+  await setDoc(doc(usersRef, obj.user.uid), {
+    id: obj.user.uid,
+    email: obj.user.email
+  });
 }
 
 const saveComposition = async (userId, name, compositionData) => {
-  const compositionsRef = collection(db, "compositions");
-    await setDoc(doc(compositionsRef), {
+  try {
+    const compositionsRef = collection(db, "compositions");
+    const newDocRef = doc(compositionsRef);
+    const docId = newDocRef.id;
+
+    await setDoc(newDocRef, {
       userId: userId,
       name: name,
-      compositionData: compositionData
+      compositionData: compositionData,
+      compositionId: docId
     });
+    console.log("Document successfully created!");
+    toast.success("Your composition has been saved!", {
+      position: "top-center"
+    });
+  } catch (error) {
+    console.error("Error creating document: ", error);
+    toast.error("There was an error saving your composition!", {
+      position: "top-center"
+    });
+  }
+};
+
+const deleteComposition = async (compositionId) => {
+  const compositionsRef = doc(db, "compositions", compositionId);
+
+  try {
+    await deleteDoc(compositionsRef);
+    toast.success("Your composition has been deleted!");
+    console.log("Document successfully deleted!");
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+  }
 };
 
 const getCompositions = async (userId) => {
@@ -60,4 +80,4 @@ const getCompositions = async (userId) => {
   }
 };
 
-export { auth, createUserDocument, saveComposition, getCompositions };
+export { auth, createUserDocument, saveComposition, getCompositions, deleteComposition };

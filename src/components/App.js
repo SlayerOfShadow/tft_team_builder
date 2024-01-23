@@ -6,6 +6,7 @@ import Register from './Register';
 import Compositions from './Compositions';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from '../utils/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -14,13 +15,14 @@ function App() {
         <Router>
           <Header />
           <Routes>
-            <Route path='/' element={<Body />}/>
-            <Route path='/login' element={<Login />}/>
-            <Route path='/register' element={<Register />}/>
-            <Route path='/compositions' element={<Compositions />}/>
+            <Route path='/' element={<Body />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/compositions' element={<Compositions />} />
           </Routes>
           <Footer />
         </Router>
+        <ToastContainer />
       </div>
     </AuthContextProvider>
   );
