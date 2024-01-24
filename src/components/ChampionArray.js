@@ -33,9 +33,9 @@ const ChampionArray = ({ data, addChampion, dragChampion }) => {
             <div className="sort-champions">
                 <input type="text" placeholder="Search champion..." maxLength={100} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
                 <div className="sort-buttons">
-                    {searchText && <button onClick={() => setSearchText("")} className="clear-search-button">✕</button>}
-                    <button onClick={sortByName} className={isSortedByName ? "selected-button" : ""}>A-Z</button>
-                    <button onClick={sortByCost} className={isSortedByName ? "" : "selected-button"}>Cost &darr;</button>
+                    {searchText && <button onClick={() => setSearchText("")} className="clear-search">✕</button>}
+                    <button onClick={sortByName} className={isSortedByName ? "selected-button" : "button2"}>A-Z</button>
+                    <button onClick={sortByCost} className={isSortedByName ? "button2" : "selected-button"}>Cost &darr;</button>
                 </div>
             </div>
             <div className="champions">

@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <a href="https://github.com/SlayerOfShadow/"><img src={gitLogo} alt="" /></a>
-            <h2>Created by Antoine Leblond</h2>
+            <p>Created by Antoine Leblond</p>
         </div>
     );
 }

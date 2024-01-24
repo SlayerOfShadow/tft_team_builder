@@ -129,11 +129,11 @@ const Body = () => {
     if (compositionName.length > 0 && traits.size > 0) {
       saveComposition(authState.uid, compositionName, hexagons);
     } else if (traits.size === 0) {
-      toast.warning("Your board can't be empty", {
+      toast.warning("Fill your board", {
         position: "top-center"
       })
     } else if (compositionName.length === 0) {
-      toast.warning("Enter a composition name", {
+      toast.warning("Enter a name", {
         position: "top-center"
       });
     }
@@ -188,10 +188,10 @@ const Body = () => {
               {authState ? (
                 <>
                   <input type="text" placeholder="Composition name..." maxLength={50} value={compositionName} onChange={(e) => setCompositionName(e.target.value)} />
-                  <button onClick={handleSaveComposition}>Save</button>
+                  <button className="button1" onClick={handleSaveComposition}>Save</button>
                 </>
               ) : (
-                <h2>Log in to save your composition</h2>
+                <p>Log in to save your composition</p>
               )}
             </div>
             <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
@@ -199,19 +199,19 @@ const Body = () => {
           <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem} swapItem={swapItem} />
           <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
           <div className="buttons-and-items">
-            <div>
-              <button onClick={clearBoard}>Clear board</button>
-              <button onClick={removeAllItems}>Clear items</button>
+            <div className="clear-buttons">
+              <button className="button1" onClick={clearBoard}>Clear board</button>
+              <button className="button1" onClick={removeAllItems}>Clear items</button>
             </div>
             <Items data={data["items"]} addItem={addItem} currentSet={currentSet} />
           </div>
         </>
       }
       {isPending &&
-        <h1>Loading...</h1>
+        <p className="loading">Loading...</p>
       }
       {error &&
-        <h1>Could not fetch the data</h1>
+        <p className="error">Could not fetch the data</p>
       }
     </div>
   );

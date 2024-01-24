@@ -11,15 +11,17 @@ const Compositions = () => {
   useEffect(() => {
     const fetchCompositions = async () => {
       try {
-        const compositions = await getCompositions(authState.uid);
-        setUserCompositions(compositions);
+        if (authState) {
+          const compositions = await getCompositions(authState.uid);
+          setUserCompositions(compositions);
+        }
       } catch (error) {
         console.error("Error fetching compositions:", error);
       }
     };
 
     fetchCompositions();
-  }, [authState.uid, userCompositions]);
+  }, [authState, userCompositions]);
 
   return (
     <div className="compositions">

@@ -21,29 +21,24 @@ const Header = () => {
     return (
         <div className="header">
             <div className="header-left">
-                <h1><Link to="/" className="home-link">Home</Link></h1>
-                {authState && <h1><Link to="/compositions" className="compositions-link">Compositions</Link></h1>}
+                <Link to="/" className="home-link">Home</Link>
+                {authState && <Link to="/compositions" className="compositions-link">Compositions</Link>}
             </div>
             <img src={tftLogo} alt="" />
             <div className="header-right">
                 {authState ? (
                     <>
-                        <h2>Welcome {authState.email}</h2>
-                        <button onClick={userSignOut}>Log out</button>
+                        <p>Welcome {authState.email}</p>
+                        <button className="button3" onClick={userSignOut}>Log out</button>
                     </>
                 ) : (
-                    <h1>
-                        <Link to="/login" className="login-link">
-                            Log in
-                        </Link>
+                    <>
+                        <Link to="/login" className="login-link">Log in</Link>
                         or
-                        <Link to="/register" className="register-link">
-                            Register
-                        </Link>
-                    </h1>
+                        <Link to="/register" className="register-link">Register</Link>
+                    </>
                 )}
             </div>
-
         </div>
     );
 }

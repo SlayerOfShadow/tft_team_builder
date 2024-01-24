@@ -40,11 +40,11 @@ const Trait = ({ trait, count, imageUrl, traitData, currentStyle }) => {
         <div className="trait" style={{ opacity: count < minUnitsValues[0] ? 0.5 : 1 }}>
             <img src={imageUrl} alt="trait" style={iconColor()} />
             <div className="trait-info">
-                <b>{trait}</b>
+                {trait}
                 <br />
                 {minUnitsValuesFormatted}
             </div>
-            <div className="trait-count"><b>{count}</b></div>
+            <div className="trait-count">{count}</div>
         </div>
     );
 }

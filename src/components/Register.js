@@ -52,7 +52,7 @@ const Register = () => {
   return (
     <div className="register">
       <form onSubmit={register} className="register-form">
-        <h1>Create an account</h1>
+        <p>Create an account</p>
         <input
           type="email"
           placeholder="Enter your email"
@@ -67,7 +67,7 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         ></input>
-        <button type="submit">Register</button>
+        <button className="button1" type="submit">Register</button>
       </form>
     </div>
   );

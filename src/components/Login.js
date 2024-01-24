@@ -32,7 +32,7 @@ const Login = () => {
     return (
         <div className="login">
             <form onSubmit={login} className="login-form">
-                <h1>Log in to your account</h1>
+                <p>Log in to your account</p>
                 <input
                     type="email"
                     placeholder="Enter your email"
@@ -47,7 +47,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 ></input>
-                <button type="submit">Log in</button>
+                <button className="button1" type="submit">Log in</button>
             </form>
         </div>
     );

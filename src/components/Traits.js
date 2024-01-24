@@ -12,14 +12,14 @@ const Traits = ({ traits, traitsData }) => {
     const currentStyle = (trait, count) => {
         const data = traitData(trait);
         let selectedStyle = -1;
-    
+
         for (const effect of data.effects) {
             if (count >= effect.minUnits && count <= effect.maxUnits) {
                 selectedStyle = effect.style;
                 break;
             }
         }
-    
+
         return selectedStyle;
     }
 
@@ -30,7 +30,7 @@ const Traits = ({ traits, traitsData }) => {
 
     return (
         <div className="traits">
-            {activeTraits.length > 0 ? activeTraits : <div className="no-traits">⚠<br /><b>No active trait</b></div>}
+            {activeTraits.length > 0 ? activeTraits : <div className="no-traits">⚠<br />No active trait</div>}
         </div>
     );
 }

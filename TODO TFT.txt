@@ -1,5 +1,5 @@
 TODO :
 
-- link firebase
-- create account and put them in database
-- users can save comps
+- clear name button
+- css
+- copy comps
