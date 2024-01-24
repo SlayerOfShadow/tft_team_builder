@@ -1,5 +1,4 @@
 TODO :
 
-- clear name button
-- css
+- compositions css
 - copy comps

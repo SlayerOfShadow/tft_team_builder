@@ -135,7 +135,7 @@ input::placeholder {
 .register,
 .compositions {
   background-color: var(--fifth-color);
-  padding: 20px;
+  padding: 40px;
   min-height: 60vh;
   color: white;
 }
@@ -206,6 +206,7 @@ input::placeholder {
 .comp-div {
   margin-bottom: 20px;
   display: flex;
+  justify-content: center;
 }
 .comp-div input {
   width: 100%;
@@ -302,8 +303,8 @@ input::placeholder {
   border: 1px solid var(--second-color);
   background-color: var(--fourth-color);
   grid-column: 2;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 .sort-champions {
   border-bottom: 1px solid var(--second-color);
@@ -415,32 +416,28 @@ input::placeholder {
   flex-direction: column;
   align-items: center;
 }
-
 .composition-card {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
-
 .composition-card-block {
   padding: 15px;
   border: 1px solid var(--second-color);
   width: 496px;
   background-color: var(--fourth-color);
-  margin-right: 15px;
 }
-
 .composition-card-block p {
-  margin-bottom: 10px;
-  padding: 5px;
+  margin: 5px 5px 15px;
 }
-
 .composition-images {
   display: flex;
   flex-wrap: wrap;
 }
-
 .composition-card-block img {
   width: 50px;
   margin: 5px;
+}
+.composition-card button {
+  margin-left: 20px;
 }

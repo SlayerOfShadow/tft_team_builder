@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { AuthContext } from "../utils/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
     const { authState } = useContext(AuthContext);
@@ -12,7 +14,9 @@ const Header = () => {
     const userSignOut = () => {
         signOut(auth)
             .then(() => {
-                console.log("Signed out successfully");
+                toast.success("Logged out !", {
+                    position: "top-center",
+                  });
                 navigate("/");
             })
             .catch((error) => console.log(error));

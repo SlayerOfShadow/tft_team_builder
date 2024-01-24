@@ -1,7 +1,6 @@
-import { deleteComposition } from "../firebase/firebase";
 import CopyToClipboard from "react-copy-to-clipboard";
 
-const Composition = ({ name, data, compositionId }) => {
+const Composition = ({ name, data, compositionId, deleteUserComposition }) => {
   const link = "192.168.0.17:3000/" + compositionId;
 
   const getBorderColor = (cost) => {
@@ -39,9 +38,9 @@ const Composition = ({ name, data, compositionId }) => {
         </div>
       </div>
       <CopyToClipboard text={link}>
-          <button>Copy</button>
+          <button className="button1">Copy</button>
       </CopyToClipboard>
-      <button onClick={(e) => deleteComposition(compositionId)}>Delete</button>
+      <button className="button1" onClick={() => deleteUserComposition(compositionId)}>Delete</button>
     </div>
   );
 }

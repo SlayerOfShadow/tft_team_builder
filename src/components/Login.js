@@ -14,11 +14,10 @@ const Login = () => {
     const login = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                toast.success("Successfully logged in", {
+            .then(() => {
+                toast.success("Logged in !", {
                     position: "top-center"
                   });
-                console.log(userCredential);
                 navigate("/")
             })
             .catch((error) => {

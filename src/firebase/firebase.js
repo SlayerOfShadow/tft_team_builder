@@ -38,8 +38,7 @@ const saveComposition = async (userId, name, compositionData) => {
       compositionData: compositionData,
       compositionId: docId
     });
-    console.log("Document successfully created!");
-    toast.success("Your composition has been saved!", {
+    toast.success("Composition saved !", {
       position: "top-center"
     });
   } catch (error) {
@@ -55,8 +54,9 @@ const deleteComposition = async (compositionId) => {
 
   try {
     await deleteDoc(compositionsRef);
-    toast.success("Your composition has been deleted!");
-    console.log("Document successfully deleted!");
+    toast.success("Composition deleted !", {
+      position: "top-center"
+    });
   } catch (error) {
     console.error("Error deleting document: ", error);
   }
