@@ -8,9 +8,17 @@ const Compositions = () => {
   const [userCompositions, setUserCompositions] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageCompositionsCount = 5;
+  const totalPages = Math.ceil(userCompositions.length / pageCompositionsCount);
+
+  const startIndex = currentPage * pageCompositionsCount;
+  const endIndex = startIndex + pageCompositionsCount;
+  const displayedCompositions = userCompositions.slice(startIndex, endIndex);
+
   const deleteUserComposition = (id) => {
     setUserCompositions(prevCompositions => prevCompositions.filter(comp => comp.compositionId !== id));
-    deleteComposition(id);
+    deleteComposition(authState.uid, id);
   };
 
   useEffect(() => {
@@ -44,20 +52,35 @@ const Compositions = () => {
   return (
     <div className="compositions">
       {userCompositions.length > 0 ? (
-        userCompositions.map((composition) => (
-          <Composition
-            key={composition.compositionId}
-            name={composition.name}
-            data={composition.compositionData}
-            compositionId={composition.compositionId}
-            deleteUserComposition={deleteUserComposition}
-          />
-        ))
+        <>
+          {displayedCompositions.map((composition) => (
+            <Composition
+              key={composition.compositionId}
+              name={composition.name}
+              data={composition.compositionData}
+              compositionId={composition.compositionId}
+              deleteUserComposition={deleteUserComposition}
+            />
+          ))}
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                className="button3"
+                key={i}
+                onClick={() => setCurrentPage(i)}
+                style={i === currentPage ? { color: "white" } : {}}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </>
       ) : (
         <p>No compositions saved</p>
       )}
     </div>
   );
+  
 }
 
 export default Compositions;

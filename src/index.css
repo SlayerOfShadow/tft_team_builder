@@ -78,6 +78,10 @@ input::placeholder {
 .button3:hover {
   color: white;
 }
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
 /* HEADER */
 
@@ -440,4 +444,10 @@ input::placeholder {
 }
 .composition-card button {
   margin-left: 20px;
+}
+.pagination {
+  margin-top: auto;
+}
+.pagination button {
+  margin-right: 20px;
 }

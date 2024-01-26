@@ -125,19 +125,23 @@ const Body = () => {
     setHexagons(updatedHexagons);
   };
 
-  const handleSaveComposition = () => {
-    if (compositionName.length > 0 && traits.size > 0) {
-      saveComposition(authState.uid, compositionName, hexagons);
-    } else if (traits.size === 0) {
-      toast.warning("Fill your board", {
-        position: "top-center"
-      })
-    } else if (compositionName.length === 0) {
-      toast.warning("Enter a name", {
-        position: "top-center"
-      });
+  const handleSaveComposition = async () => {
+    try {
+      if (compositionName.length > 0 && traits.size > 0) {
+        await saveComposition(authState.uid, compositionName, hexagons);
+      } else if (traits.size === 0) {
+        toast.warning("Fill your board", {
+          position: "top-center",
+        });
+      } else if (compositionName.length === 0) {
+        toast.warning("Enter a name", {
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      console.error("Error saving composition:", error);
     }
-  }
+  };
 
   useEffect(() => {
     if (data !== null) createTraitsOrder();

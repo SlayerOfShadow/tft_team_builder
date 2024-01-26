@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc, query, where } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, deleteDoc, updateDoc, query, where, orderBy, serverTimestamp } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,25 +22,42 @@ const createUserDocument = async (obj) => {
   const usersRef = collection(db, "users");
   await setDoc(doc(usersRef, obj.user.uid), {
     id: obj.user.uid,
-    email: obj.user.email
+    email: obj.user.email,
+    compositionsCount: 0
   });
 }
 
 const saveComposition = async (userId, name, compositionData) => {
   try {
-    const compositionsRef = collection(db, "compositions");
-    const newDocRef = doc(compositionsRef);
-    const docId = newDocRef.id;
+    const userRef = doc(collection(db, "users"), userId);
+    const userDoc = await getDoc(userRef);
+    const currentCompositionsCount = userDoc.data().compositionsCount;
 
-    await setDoc(newDocRef, {
-      userId: userId,
-      name: name,
-      compositionData: compositionData,
-      compositionId: docId
-    });
-    toast.success("Composition saved !", {
-      position: "top-center"
-    });
+    if (currentCompositionsCount < 20) {
+      const compositionsRef = collection(db, "compositions");
+      const newDocRef = doc(compositionsRef);
+      const docId = newDocRef.id;
+
+      await setDoc(newDocRef, {
+        userId: userId,
+        name: name,
+        compositionData: compositionData,
+        compositionId: docId,
+        date: serverTimestamp()
+      });
+      toast.success("Composition saved !", {
+        position: "top-center"
+      });
+
+      await updateDoc(userRef, {
+        compositionsCount: currentCompositionsCount + 1
+      });
+    } else {
+      toast.error("You can't have more than 20 compositions", {
+        position: "top-center"
+      });
+    }
+
   } catch (error) {
     console.error("Error creating document: ", error);
     toast.error("There was an error saving your composition!", {
@@ -49,13 +66,20 @@ const saveComposition = async (userId, name, compositionData) => {
   }
 };
 
-const deleteComposition = async (compositionId) => {
-  const compositionsRef = doc(db, "compositions", compositionId);
-
+const deleteComposition = async (userId, compositionId) => {
   try {
+    const compositionsRef = doc(db, "compositions", compositionId);
     await deleteDoc(compositionsRef);
     toast.success("Composition deleted !", {
       position: "top-center"
+    });
+
+    const userRef = doc(collection(db, "users"), userId);
+    const userDoc = await getDoc(userRef);
+    const currentCompositionsCount = userDoc.data().compositionsCount;
+    
+    await updateDoc(userRef, {
+      compositionsCount: currentCompositionsCount - 1
     });
   } catch (error) {
     console.error("Error deleting document: ", error);
@@ -65,7 +89,11 @@ const deleteComposition = async (compositionId) => {
 const getCompositions = async (userId) => {
   try {
     const compositionsRef = collection(db, "compositions");
-    const q = query(compositionsRef, where("userId", "==", userId));
+    const q = query(
+      compositionsRef,
+      where("userId", "==", userId),
+      orderBy("date", "desc")
+    );
 
     const compositions = [];
     const querySnapshot = await getDocs(q);
