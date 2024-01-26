@@ -18,6 +18,8 @@ const Compositions = () => {
 
   const deleteUserComposition = (id) => {
     setUserCompositions(prevCompositions => prevCompositions.filter(comp => comp.compositionId !== id));
+    const updatedTotalPages = Math.ceil((userCompositions.length - 1) / pageCompositionsCount);
+    setCurrentPage((prevPage) => Math.min(prevPage, updatedTotalPages - 1));
     deleteComposition(authState.uid, id);
   };
 

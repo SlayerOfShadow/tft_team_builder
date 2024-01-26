@@ -1,5 +1,4 @@
 TODO :
 
 - disable save button on click to avoid spamming
-- when deleting all composition on a page (not the first one) go back to previous page
 - copy comps
