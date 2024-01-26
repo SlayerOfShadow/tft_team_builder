@@ -19,6 +19,7 @@ const Body = () => {
   const [traits, setTraits] = useState(new Map());
   const [traitsOrder, setTraitsOrder] = useState(new Map());
   const [compositionName, setCompositionName] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const { authState } = useContext(AuthContext);
 
@@ -126,6 +127,7 @@ const Body = () => {
   };
 
   const handleSaveComposition = async () => {
+    setIsSaving(true);
     try {
       if (compositionName.length > 0 && traits.size > 0) {
         await saveComposition(authState.uid, compositionName, hexagons);
@@ -140,7 +142,13 @@ const Body = () => {
       }
     } catch (error) {
       console.error("Error saving composition:", error);
+    } finally {
+      setTimeout(() => {
+        setIsSaving(false);
+      }, 1000);
     }
+
+    
   };
 
   useEffect(() => {
@@ -192,7 +200,7 @@ const Body = () => {
               {authState ? (
                 <>
                   <input type="text" placeholder="Composition name..." maxLength={50} value={compositionName} onChange={(e) => setCompositionName(e.target.value)} />
-                  <button className="button1" onClick={handleSaveComposition}>Save</button>
+                  <button id="save-button" className="button1" onClick={handleSaveComposition} disabled={isSaving}>Save</button>
                 </>
               ) : (
                 <p>Log in to save your composition</p>
