@@ -1,7 +1,7 @@
 import Champion from "./Champion";
 import { useState, useEffect } from "react";
 
-const ChampionArray = ({ data, addChampion, dragChampion }) => {
+const ChampionArray = ({ data, addChampion, dragChampion, traitsData }) => {
     const filterChampions = (champions) => {
         const championsWithTraits = champions.filter(champion => champion.traits.length > 0 && champion.cost <= 5);
         return Object.values(championsWithTraits);
@@ -43,12 +43,14 @@ const ChampionArray = ({ data, addChampion, dragChampion }) => {
                     champion.traits.length > 0 &&
                     <Champion
                         key={champion.apiName}
+                        name={champion.name}
                         url={champion.tileIcon}
                         cost={champion.cost}
                         traits={champion.traits}
                         opacity={champion.name.toLowerCase().includes(searchText.toLowerCase()) ? 1 : 0.2}
                         addChampion={addChampion}
                         dragChampion={dragChampion}
+                        traitsData={traitsData}
                     />
                 ))}
             </div>

@@ -209,7 +209,7 @@ const Body = () => {
             <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
           </div>
           <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem} swapItem={swapItem} />
-          <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} />
+          <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} traitsData={data["sets"][currentSet]["traits"]}/>
           <div className="buttons-and-items">
             <div className="clear-buttons">
               <button className="button1" onClick={clearBoard}>Clear board</button>

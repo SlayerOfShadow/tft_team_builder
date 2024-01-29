@@ -10,7 +10,7 @@ const Trait = ({ trait, count, imageUrl, traitData, currentStyle }) => {
 
     const minUnitsValuesFormatted = traitData.effects.map((effect, index) => (
         <span key={index}>
-            {index > 0 ? " > " : ""}
+            {index > 0 ? ' \u203A ' : ""}
             {effect.minUnits === currentLevel ? (
                 <b>{effect.minUnits}</b>
             ) : (

@@ -336,6 +336,46 @@ button:disabled {
   cursor: pointer;
 }
 
+/* CHAMPION INFO */
+
+.champion-info {
+  border: 1px solid var(--second-color);
+  background-color: var(--fifth-color);
+  display: flex;
+}
+.champion-info-img {
+  border-right: 1px solid var(--second-color);
+  padding: 20px;
+  text-align: center;
+}
+.champion-info-img img {
+  border: 1px solid var(--second-color);
+  width: 80px;
+}
+.champion-info-traits {
+  border-right: 1px solid var(--second-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.champion-info-trait {
+  display: flex;
+}
+.champion-info-trait img {
+  width: auto;
+  margin-right: 10px;
+}
+.champion-info-cost {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+.champion-info-cost img {
+  width: 100%;
+  margin-left: 10px;
+}
+
 /* BOARD */
 
 .board {

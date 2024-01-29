@@ -1,3 +1,4 @@
 TODO :
 
+- fix img appearing after a certain delay
 - copy comps
