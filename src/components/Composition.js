@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Composition = ({ name, data, compositionId, deleteUserComposition }) => {
-  const link = "192.168.0.17:3000/" + compositionId;
+  const link = window.location.origin + "/" + compositionId;
 
   const copyComposition = () => {
     toast.success("Link copied !", {
