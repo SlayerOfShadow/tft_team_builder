@@ -50,7 +50,7 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
         } else if (stars) {
             setShowStars(true);
         }
-    }, [cost]);
+    }, [cost, stars]);
 
     let marginLeft = 0;
     let starsMarginLeft = 0;

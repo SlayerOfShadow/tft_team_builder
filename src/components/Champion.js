@@ -30,6 +30,10 @@ const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion,
             break;
     }
 
+    const handleChampionOnDragStart = () => {
+        setShowInfo(false);
+    }
+
     const handleChampionOnDragEnd = (event) => {
         const x = event.clientX;
         const y = event.clientY;
@@ -71,9 +75,6 @@ const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion,
         <div
             className="champion-card"
             style={{ opacity: opacity }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseMove={handleMouseMove}
         >
             <img
                 src={imageUrl}
@@ -81,7 +82,11 @@ const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion,
                 type="Champion"
                 style={borderStyle}
                 onClick={() => addChampion(imageUrl, cost, traits)}
+                onDragStart={handleChampionOnDragStart}
                 onDragEnd={handleChampionOnDragEnd}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onMouseMove={handleMouseMove}
             />
             {showInfo && (
                 <div className="champion-info" style={{ position: 'fixed', bottom: window.innerHeight - position.y, right: window.innerWidth - position.x}}>
