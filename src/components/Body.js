@@ -17,11 +17,22 @@ const Body = () => {
 
   const [hexagons, setHexagons] = useState(new Array(28).fill({ imageUrl: "", cost: 0, traits: null, stars: false, items: [] }));
   const [traits, setTraits] = useState(new Map());
+  const [traitsIcons, setTraitsIcons] = useState(new Map());
   const [traitsOrder, setTraitsOrder] = useState(new Map());
   const [compositionName, setCompositionName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
   const { authState } = useContext(AuthContext);
+
+  const getTraitsIcons = () => {
+    const newTraitsIcons = new Map();
+
+    data["sets"][currentSet]["traits"].forEach((trait) => {
+      newTraitsIcons.set(trait.name, "https://raw.communitydragon.org/latest/game/" + trait.icon.toLowerCase().replace(".tex", ".png"));
+    });
+
+    setTraitsIcons(newTraitsIcons);
+  };
 
   const createTraitsOrder = () => {
     const championsData = data["sets"][currentSet]["champions"];
@@ -152,7 +163,11 @@ const Body = () => {
   };
 
   useEffect(() => {
-    if (data !== null) createTraitsOrder();
+    if (data !== null)
+    {
+      getTraitsIcons();
+      createTraitsOrder();
+    } 
     // eslint-disable-next-line
   }, [data]);
 
@@ -206,10 +221,10 @@ const Body = () => {
                 <p>Log in to save your composition</p>
               )}
             </div>
-            <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} />
+            <Traits traits={traits} traitsData={data["sets"][currentSet]["traits"]} traitsIcons={traitsIcons}/>
           </div>
           <Board hexagons={hexagons} swapChampion={swapChampion} removeChampion={removeChampion} setStars={setStars} removeItem={removeItem} swapItem={swapItem} />
-          <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} traitsData={data["sets"][currentSet]["traits"]}/>
+          <ChampionArray data={data["sets"][currentSet]["champions"]} addChampion={addChampion} dragChampion={dragChampion} traitsIcons={traitsIcons}/>
           <div className="buttons-and-items">
             <div className="clear-buttons">
               <button className="button1" onClick={clearBoard}>Clear board</button>

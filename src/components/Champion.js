@@ -1,18 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion, traitsData }) => {
+const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion, traitsIcons }) => {
     const [showInfo, setShowInfo] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const imageUrl = "https://raw.communitydragon.org/latest/game/" + url.toLowerCase().replace(/\.(tex|dds)$/, ".png");
     const goldIconUrl = "https://raw.communitydragon.org/13.18/game/assets/ux/tft/regionportals/icon/gold.tft_set9_stage2.png";
-
-    const traitData = (trait) => {
-        return traitsData.find(item => item.name === trait);
-    }
-
-    const traitImageUrl = (trait) => {
-        return "https://raw.communitydragon.org/latest/game/" + traitData(trait).icon.toLowerCase().replace(".tex", ".png");
-    }
 
     const borderStyle = {
         border: "1px solid",
@@ -104,7 +96,7 @@ const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion,
                         {traits.map((trait, index) => (
                             <div className="champion-info-trait" key={index}>
                                 <img 
-                                    src={traitImageUrl(trait)}
+                                    src={traitsIcons.get(trait)}
                                     alt="trait-icon"
                                 />
                                 <div>{trait}</div>
