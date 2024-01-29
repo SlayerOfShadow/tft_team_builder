@@ -1,7 +1,15 @@
 import CopyToClipboard from "react-copy-to-clipboard";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Composition = ({ name, data, compositionId, deleteUserComposition }) => {
   const link = "192.168.0.17:3000/" + compositionId;
+
+  const copyComposition = () => {
+    toast.success("Link copied !", {
+      position: "top-center",
+    });
+  }
 
   const getBorderColor = (cost) => {
     switch (cost) {
@@ -38,7 +46,7 @@ const Composition = ({ name, data, compositionId, deleteUserComposition }) => {
         </div>
       </div>
       <CopyToClipboard text={link}>
-          <button className="button1">Copy</button>
+          <button onClick={copyComposition} className="button1">Copy</button>
       </CopyToClipboard>
       <button className="button1" onClick={() => deleteUserComposition(compositionId)}>Delete</button>
     </div>

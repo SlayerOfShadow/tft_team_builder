@@ -4,8 +4,9 @@ import Board from "./Board";
 import Traits from "./Traits";
 import Items from "./Items";
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { AuthContext } from "../utils/AuthContext";
-import { saveComposition } from "../firebase/firebase";
+import { saveComposition, fetchCompositionData } from "../firebase/firebase";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,6 +24,8 @@ const Body = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const { authState } = useContext(AuthContext);
+
+  const { compositionId } = useParams();
 
   const getTraitsIcons = () => {
     const newTraitsIcons = new Map();
@@ -157,17 +160,23 @@ const Body = () => {
       setTimeout(() => {
         setIsSaving(false);
       }, 1000);
-    }
-
-    
+    }   
   };
 
   useEffect(() => {
-    if (data !== null)
-    {
-      getTraitsIcons();
-      createTraitsOrder();
-    } 
+    const fetchData = async () => {
+      if (data !== null) {
+        getTraitsIcons();
+        createTraitsOrder();
+        
+        if (compositionId) {
+          const compositionData = await fetchCompositionData(compositionId);
+          if (compositionData) setHexagons(compositionData);
+        }
+      } 
+    }
+
+    fetchData();
     // eslint-disable-next-line
   }, [data]);
 

@@ -77,7 +77,7 @@ const deleteComposition = async (userId, compositionId) => {
     const userRef = doc(collection(db, "users"), userId);
     const userDoc = await getDoc(userRef);
     const currentCompositionsCount = userDoc.data().compositionsCount;
-    
+
     await updateDoc(userRef, {
       compositionsCount: currentCompositionsCount - 1
     });
@@ -108,4 +108,20 @@ const getCompositions = async (userId) => {
   }
 };
 
-export { auth, createUserDocument, saveComposition, getCompositions, deleteComposition };
+const fetchCompositionData = async (compositionId) => {
+  try {
+    const compositionRef = doc(db, "compositions", compositionId);
+    const compositionDoc = await getDoc(compositionRef);
+    if (compositionDoc.exists) 
+    {
+      const compositionData = compositionDoc.data().compositionData;
+      return compositionData;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching composition data');
+  }
+}
+
+export { auth, createUserDocument, saveComposition, getCompositions, deleteComposition, fetchCompositionData };

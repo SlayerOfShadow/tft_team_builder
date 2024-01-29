@@ -16,6 +16,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Body />} />
+            <Route path='/:compositionId' element={<Body />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/compositions' element={<Compositions />} />
