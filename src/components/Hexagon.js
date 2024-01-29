@@ -5,22 +5,21 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
 
     const handleMouseEnter = () => {
         setShowStars(true);
-      };
-    
-      const handleMouseLeave = () => {
+    };
+
+    const handleMouseLeave = () => {
         if (stars === false) setShowStars(false);
-      };
+    };
 
     const handleOnDragEnd = (event) => {
         const x = event.clientX;
         const y = event.clientY;
-    
+
         const elementAtDragEnd = document.elementFromPoint(x, y);
-    
+
         if (elementAtDragEnd) {
             const positionValue = elementAtDragEnd.getAttribute("position");
-            if (positionValue)
-            {
+            if (positionValue) {
                 swapChampion(position, positionValue);
             }
         }
@@ -31,12 +30,11 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
         const y = event.clientY;
 
         const elementAtDragEnd = document.elementFromPoint(x, y);
-    
+
         if (elementAtDragEnd) {
             const type = elementAtDragEnd.getAttribute("type");
             const positionValue = elementAtDragEnd.getAttribute("position");
-            if (type === "champion")
-            {
+            if (type === "champion") {
                 swapItem(position, positionValue, index, name, url, unique, trait);
             }
         }
@@ -44,11 +42,13 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
 
     const allowDrop = (event) => {
         event.preventDefault();
-      }
+    }
 
     useEffect(() => {
         if (cost === 0) {
             setShowStars(false);
+        } else if (stars) {
+            setShowStars(true);
         }
     }, [cost]);
 
@@ -89,34 +89,34 @@ const Hexagon = ({ position, imageUrl, cost, swapChampion, removeChampion, stars
         <div className="hexagon">
             <div className="hexagon-border" style={{ marginLeft: `${marginLeft}px`, backgroundColor }}>
                 <div className="hexagon-image" position={position} onDragOver={allowDrop}>
-                    {imageUrl && <img src={imageUrl} alt="champion-img" position={position} type="champion" onClick={() => removeChampion(position)} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>}
+                    {imageUrl && <img src={imageUrl} alt="champion-img" position={position} type="champion" onClick={() => removeChampion(position)} onDragEnd={handleOnDragEnd} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />}
                 </div>
             </div>
-            {showStars && 
-            <div className="stars" 
-                style={{
-                     marginLeft: `${starsMarginLeft}px`,
-                     color: stars ? '#f1d25e' : '#565f8a',
-                    }} 
-                onClick={() => setStars(position, !stars)} 
-                onMouseEnter={handleMouseEnter} 
-                onMouseLeave={handleMouseLeave}
+            {showStars &&
+                <div className="stars"
+                    style={{
+                        marginLeft: `${starsMarginLeft}px`,
+                        color: stars ? '#f1d25e' : '#565f8a',
+                    }}
+                    onClick={() => setStars(position, !stars)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                 >★★★
-            </div>}
+                </div>}
             <div className="champion-items"
-            style={{
-                marginLeft: `${starsMarginLeft}px`,
-               }} >
-            {items.length > 0 &&
-                items.map((item, index) => (
-                    <img className="champion-item-icon" 
-                        key={index} 
-                        src={item.url} 
-                        alt="champion-item-icon" 
-                        onClick={() => removeItem(position, index)}
-                        onDragEnd={(event) => handleItemOnDragEnd(event, index, item.name, item.url, item.unique, item.trait)}
-                    />
-                ))}
+                style={{
+                    marginLeft: `${starsMarginLeft}px`,
+                }} >
+                {items.length > 0 &&
+                    items.map((item, index) => (
+                        <img className="champion-item-icon"
+                            key={index}
+                            src={item.url}
+                            alt="champion-item-icon"
+                            onClick={() => removeItem(position, index)}
+                            onDragEnd={(event) => handleItemOnDragEnd(event, index, item.name, item.url, item.unique, item.trait)}
+                        />
+                    ))}
             </div>
         </div>
     );
