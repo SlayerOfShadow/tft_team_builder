@@ -32,6 +32,7 @@ const Champion = ({ name, url, cost, traits, opacity, addChampion, dragChampion,
 
     const handleChampionOnDragStart = () => {
         setShowInfo(false);
+        clearTimeout(timeoutIdRef.current);
     }
 
     const handleChampionOnDragEnd = (event) => {
