@@ -1,3 +1,13 @@
+# How to use
+
+Available online : (available soon)
+
+Drag and drop champions to your board in order to create powerful synergies.
+
+You can equip your champions with items and make them 3 stars.
+
+You can save your compositions by creating an account and even share them with your friends !
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
