@@ -1,6 +1,6 @@
 # How to use
 
-Available online : (available soon)
+Available online : https://team-builder-tft.netlify.app/
 
 Drag and drop champions to your board in order to create powerful synergies.
 
