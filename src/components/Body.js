@@ -11,8 +11,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Body = () => {
-  const currentSet = "10";
-  const currentPatch = "14.1";
+  const currentSet = "11";
+  const currentPatch = "14.6";
 
   const { data, isPending, error } = useFetch("https://raw.communitydragon.org/" + currentPatch + "/cdragon/tft/en_us.json");
 
