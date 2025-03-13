@@ -8,10 +8,10 @@ const Items = ({ data, addItem, currentSet }) => {
     const uniqueIcons = new Set();
 
     return items.filter(item => {
-      const isStandardIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Standard/");
+      const isStandardIcon = item.icon.startsWith("ASSETS/Maps/TFT/Icons/Items/Hexcore/");
       const isSpatulaIcon = item.icon.startsWith("ASSETS/Maps/Particles/TFT/Item_Icons/Traits/Spatula/Set" + currentSet + "/");
 
-      if ((item.name !== "Guardian Angel" && item.composition.length > 0 && isStandardIcon) || isSpatulaIcon) {
+      if (item.composition.length > 0 && (isStandardIcon || isSpatulaIcon)) {
         if (!uniqueIcons.has(item.icon)) {
           uniqueIcons.add(item.icon);
           return true;
